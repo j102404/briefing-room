@@ -162,3 +162,15 @@ Always pair a display font + body font. Variable fonts preferred.
 - Use 21st.dev components where appropriate
 - Architecture: lib/data-strategies/ and lib/prompts/ for extensibility
 - No auth, no database, no scope creep
+
+## FMP API Quota Management
+FMP free tier: 250 calls/day. Each stock analysis makes 4 parallel FMP calls.
+
+**When iterating on prompts / UI:** set `USE_MOCK_FMP=true` in `.env.local`.
+This reads from `lib/mock-data/{TICKER}.json` instead of hitting FMP.
+
+**When testing live data:** set `USE_MOCK_FMP=false`.
+On a successful fetch, the response is automatically written to `lib/mock-data/{TICKER}.json`,
+building up the cache over time. Commit these files so teammates share the cache.
+
+Mock files in `lib/mock-data/` are safe to commit — they contain no secrets, only public market data.

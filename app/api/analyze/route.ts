@@ -1,6 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { getSystemPrompt } from '@/lib/prompts'
 import { getDataForSubject } from '@/lib/data-strategies'
+import type { StockData } from '@/lib/types'
 
 export const maxDuration = 120
 
@@ -112,7 +113,6 @@ const GENERATE_BRIEF_TOOL: Anthropic.Messages.Tool = {
   },
 }
 
-// Web search tool definition (Anthropic built-in, requires beta header)
 const WEB_SEARCH_TOOL = {
   type: 'web_search_20250305',
   name: 'web_search',
@@ -123,11 +123,37 @@ function sseEvent(event: string, data: unknown): string {
   return `event: ${event}\ndata: ${JSON.stringify(data)}\n\n`
 }
 
+function fmtLarge(n: number | null): string {
+  if (n == null) return 'N/A'
+  const abs = Math.abs(n)
+  if (abs >= 1e12) return `$${(n / 1e12).toFixed(2)}T`
+  if (abs >= 1e9) return `$${(n / 1e9).toFixed(2)}B`
+  if (abs >= 1e6) return `$${(n / 1e6).toFixed(2)}M`
+  return `$${n.toFixed(0)}`
+}
+
+function pctStr(n: number | null): string {
+  if (n == null) return 'N/A'
+  return `${n >= 0 ? '+' : ''}${n.toFixed(1)}%`
+}
+
+function buildVerifiedDataBlock(d: StockData, today: string): string {
+  return `VERIFIED FINANCIAL DATA for ${d.ticker} (${d.companyName}):
+- Sector: ${d.sector || 'N/A'} | Industry: ${d.industry || 'N/A'}
+- Current Price: $${d.price.toFixed(2)} (as of ${today})
+- Market Cap: ${fmtLarge(d.marketCap)}
+- P/E (TTM): ${d.peRatioTTM != null ? d.peRatioTTM.toFixed(1) + 'x' : 'N/A'}
+- 52-Week Range: $${d.yearLow.toFixed(2)} – $${d.yearHigh.toFixed(2)}
+- 50-Day Avg: $${d.priceAvg50.toFixed(2)} | 200-Day Avg: $${d.priceAvg200.toFixed(2)}
+- Revenue (latest FY): ${fmtLarge(d.revenue)} | Revenue Growth YoY: ${pctStr(d.revenueGrowthYoY)}
+- Gross Margin: ${d.grossProfitMarginTTM != null ? d.grossProfitMarginTTM.toFixed(1) + '%' : 'N/A'} | Operating Margin: ${d.operatingProfitMarginTTM != null ? d.operatingProfitMarginTTM.toFixed(1) + '%' : 'N/A'} | Net Margin: ${d.netProfitMarginTTM != null ? d.netProfitMarginTTM.toFixed(1) + '%' : 'N/A'}
+- EPS: ${d.eps != null ? '$' + d.eps.toFixed(2) : 'N/A'} | ROE: ${d.returnOnEquityTTM != null ? d.returnOnEquityTTM.toFixed(1) + '%' : 'N/A'} | Debt/Equity: ${d.debtToEquityTTM != null ? d.debtToEquityTTM.toFixed(2) : 'N/A'}
+
+USE THIS DATA AS GROUND TRUTH. Do not contradict these numbers. If you need additional data points beyond what is listed here, use web search.`
+}
+
 export async function POST(req: Request) {
   const { subject, thesis } = await req.json()
-
-  const subjectData = await getDataForSubject(subject)
-  const systemPrompt = getSystemPrompt(subjectData.type)
 
   const encoder = new TextEncoder()
 
@@ -138,20 +164,36 @@ export async function POST(req: Request) {
       }
 
       try {
-        send('status', { message: 'Initializing research desk...' })
+        send('status', { message: 'Fetching market data…' })
 
-        const userContent = `Subject: ${subject}\n\nInvestment Thesis:\n${thesis}${subjectData.additionalContext ? `\n\nAdditional context:\n${subjectData.additionalContext}` : ''}`
+        // Fetch FMP data (or null for non-stocks)
+        const subjectData = await getDataForSubject(subject)
+        const { stockData } = subjectData
+
+        // Emit stock_data immediately so the frontend can render MetricsCard
+        send('stock_data', stockData)
+
+        const systemPrompt = getSystemPrompt(subjectData.type)
+        const today = new Date().toISOString().split('T')[0]
+
+        // Build the user message — prepend verified data block for stocks
+        const verifiedBlock = stockData ? buildVerifiedDataBlock(stockData, today) : ''
+        const userContent = [
+          verifiedBlock,
+          `Subject: ${subject}`,
+          `Investment Thesis:\n${thesis}`,
+        ].filter(Boolean).join('\n\n')
+
+        send('status', { message: 'Initializing research desk…' })
 
         const messages: Anthropic.Messages.MessageParam[] = [
           { role: 'user', content: userContent },
         ]
 
         let brief: unknown = null
-        let searchCount = 0
         const MAX_ITER = 6
 
         for (let iter = 0; iter < MAX_ITER && !brief; iter++) {
-          // After the first search pass, force structured output
           const forceStructured = iter > 0
           const toolChoice = forceStructured
             ? ({ type: 'tool', name: 'generate_research_brief' } as const)
@@ -160,7 +202,6 @@ export async function POST(req: Request) {
           let response: Anthropic.Messages.Message
 
           try {
-            // Attempt with web search beta
             response = await anthropic.messages.create(
               {
                 model: 'claude-opus-4-7',
@@ -173,13 +214,10 @@ export async function POST(req: Request) {
                 tool_choice: toolChoice,
                 messages,
               },
-              {
-                headers: { 'anthropic-beta': 'web-search-2025-03-05' },
-              }
+              { headers: { 'anthropic-beta': 'web-search-2025-03-05' } }
             )
-          } catch (betaErr: any) {
-            // Beta unavailable — skip web search, force structured output directly
-            send('status', { message: 'Analyzing with training data...' })
+          } catch {
+            send('status', { message: 'Analyzing…' })
             response = await anthropic.messages.create({
               model: 'claude-opus-4-7',
               max_tokens: 8096,
@@ -203,13 +241,11 @@ export async function POST(req: Request) {
             }
 
             if (block.name === 'web_search') {
-              searchCount++
               const query = (block.input as any)?.query ?? subject
               send('status', { message: `Searching: "${query}"…` })
               toolResults.push({
                 type: 'tool_result',
                 tool_use_id: block.id,
-                // The beta API executes the search server-side; acknowledge the call
                 content: `Search acknowledged for: ${query}`,
               })
             }
@@ -219,9 +255,8 @@ export async function POST(req: Request) {
 
           if (toolResults.length > 0) {
             messages.push({ role: 'user', content: toolResults })
-            send('status', { message: 'Processing market intelligence...' })
+            send('status', { message: 'Processing market intelligence…' })
           } else if (response.stop_reason === 'end_turn') {
-            // Claude responded in text without calling a tool — nudge it
             messages.push({
               role: 'user',
               content: 'Now call the generate_research_brief tool to produce your structured analysis.',
@@ -232,7 +267,7 @@ export async function POST(req: Request) {
         if (brief) {
           send('brief', brief)
         } else {
-          send('error', { message: 'Failed to generate structured brief after maximum iterations. Please try again.' })
+          send('error', { message: 'Failed to generate structured brief. Please try again.' })
         }
       } catch (err: any) {
         send('error', { message: err?.message ?? 'An unexpected error occurred.' })

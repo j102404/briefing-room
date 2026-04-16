@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import BriefDisplay from '@/components/BriefDisplay'
-import type { ResearchBrief } from '@/lib/types'
+import MetricsCard from '@/components/MetricsCard'
+import type { ResearchBrief, StockData } from '@/lib/types'
 
 const DEFAULT_SUBJECT = 'NVDA'
 const DEFAULT_THESIS =
@@ -17,18 +18,20 @@ function Spinner() {
 }
 
 export default function Home() {
-  const [subject, setSubject] = useState(DEFAULT_SUBJECT)
-  const [thesis, setThesis] = useState(DEFAULT_THESIS)
-  const [brief, setBrief] = useState<ResearchBrief | null>(null)
-  const [status, setStatus] = useState<Status>('idle')
+  const [subject, setSubject]     = useState(DEFAULT_SUBJECT)
+  const [thesis, setThesis]       = useState(DEFAULT_THESIS)
+  const [brief, setBrief]         = useState<ResearchBrief | null>(null)
+  const [stockData, setStockData] = useState<StockData | null>(null)
+  const [status, setStatus]       = useState<Status>('idle')
   const [statusMsg, setStatusMsg] = useState('')
-  const [error, setError] = useState('')
+  const [error, setError]         = useState('')
 
   const isRunning = status === 'loading'
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     setBrief(null)
+    setStockData(null)
     setError('')
     setStatus('loading')
     setStatusMsg('Connecting to research desk…')
@@ -40,9 +43,7 @@ export default function Home() {
         body: JSON.stringify({ subject: subject.trim(), thesis: thesis.trim() }),
       })
 
-      if (!res.ok || !res.body) {
-        throw new Error(`Request failed: ${res.status}`)
-      }
+      if (!res.ok || !res.body) throw new Error(`Request failed: ${res.status}`)
 
       const reader = res.body.getReader()
       const decoder = new TextDecoder()
@@ -53,8 +54,6 @@ export default function Home() {
         if (done) break
 
         buf += decoder.decode(value, { stream: true })
-
-        // SSE blocks are separated by double newline
         const blocks = buf.split('\n\n')
         buf = blocks.pop() ?? ''
 
@@ -62,7 +61,7 @@ export default function Home() {
           if (!block.trim()) continue
 
           let eventType = ''
-          let dataLine = ''
+          let dataLine  = ''
 
           for (const line of block.split('\n')) {
             if (line.startsWith('event: ')) eventType = line.slice(7).trim()
@@ -76,6 +75,9 @@ export default function Home() {
 
             if (eventType === 'status') {
               setStatusMsg(payload.message)
+            } else if (eventType === 'stock_data') {
+              // May be null for non-stock subjects — that's expected
+              setStockData(payload)
             } else if (eventType === 'brief') {
               setBrief(payload as ResearchBrief)
               setStatus('done')
@@ -90,9 +92,7 @@ export default function Home() {
         }
       }
 
-      if (status !== 'done' && status !== 'error') {
-        setStatus('idle')
-      }
+      if (status !== 'done' && status !== 'error') setStatus('idle')
     } catch (err: any) {
       setError(err?.message ?? 'Unexpected error')
       setStatus('error')
@@ -134,7 +134,6 @@ export default function Home() {
         {/* ── Form ── */}
         <form onSubmit={handleSubmit} className="mb-12">
           <div className="bg-navy-800 border border-white/[0.06] rounded-2xl p-6 space-y-5">
-            {/* Subject */}
             <div>
               <label
                 htmlFor="subject"
@@ -154,7 +153,6 @@ export default function Home() {
               />
             </div>
 
-            {/* Thesis */}
             <div>
               <label
                 htmlFor="thesis"
@@ -174,7 +172,6 @@ export default function Home() {
               />
             </div>
 
-            {/* Footer row */}
             <div className="flex items-center justify-between gap-4 pt-1">
               <p className="text-xs text-slate-700 font-body">
                 Stocks · Commodities · Macro themes · Asset classes
@@ -193,9 +190,16 @@ export default function Home() {
 
         {/* ── Status line ── */}
         {isRunning && statusMsg && (
-          <div className="flex items-center gap-3 mb-8 text-slate-500 text-xs font-body">
+          <div className="flex items-center gap-3 mb-6 text-slate-500 text-xs font-body">
             <Spinner />
             <span>{statusMsg}</span>
+          </div>
+        )}
+
+        {/* ── MetricsCard (early render — visible while brief is still generating) ── */}
+        {stockData && !brief && (
+          <div className="mb-6">
+            <MetricsCard data={stockData} />
           </div>
         )}
 
@@ -206,8 +210,8 @@ export default function Home() {
           </div>
         )}
 
-        {/* ── Brief ── */}
-        {brief && <BriefDisplay brief={brief} />}
+        {/* ── Full brief (MetricsCard re-renders inside BriefDisplay at this point) ── */}
+        {brief && <BriefDisplay brief={brief} stockData={stockData} />}
       </main>
     </div>
   )

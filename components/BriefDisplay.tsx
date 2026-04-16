@@ -1,7 +1,8 @@
 'use client'
 
-import type { ResearchBrief } from '@/lib/types'
+import type { ResearchBrief, StockData } from '@/lib/types'
 import ConvictionBadge from './ConvictionBadge'
+import MetricsCard from './MetricsCard'
 
 function SectionCard({
   label,
@@ -47,7 +48,13 @@ function BulletList({
   )
 }
 
-export default function BriefDisplay({ brief }: { brief: ResearchBrief }) {
+export default function BriefDisplay({
+  brief,
+  stockData,
+}: {
+  brief: ResearchBrief
+  stockData?: StockData | null
+}) {
   return (
     <div className="space-y-5">
       {/* Divider */}
@@ -63,6 +70,13 @@ export default function BriefDisplay({ brief }: { brief: ResearchBrief }) {
       <SectionCard label="Thesis (Restated)" delay={60}>
         <p className="text-slate-200 font-body leading-relaxed italic">{brief.thesis_summary}</p>
       </SectionCard>
+
+      {/* MetricsCard — stocks only, above ConvictionBadge */}
+      {stockData && (
+        <div className="brief-animate" style={{ animationDelay: '90ms' }}>
+          <MetricsCard data={stockData} />
+        </div>
+      )}
 
       {/* Conviction */}
       <div className="brief-animate" style={{ animationDelay: '120ms' }}>
