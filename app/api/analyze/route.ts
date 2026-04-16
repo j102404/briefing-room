@@ -163,7 +163,7 @@ export async function POST(req: Request) {
             // Attempt with web search beta
             response = await anthropic.messages.create(
               {
-                model: 'claude-sonnet-4-20250514',
+                model: 'claude-opus-4-7',
                 max_tokens: 8096,
                 system: systemPrompt,
                 // @ts-ignore — web_search_20250305 is a beta built-in tool
@@ -181,7 +181,7 @@ export async function POST(req: Request) {
             // Beta unavailable — skip web search, force structured output directly
             send('status', { message: 'Analyzing with training data...' })
             response = await anthropic.messages.create({
-              model: 'claude-sonnet-4-20250514',
+              model: 'claude-opus-4-7',
               max_tokens: 8096,
               system: systemPrompt,
               tools: [GENERATE_BRIEF_TOOL],
