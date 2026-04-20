@@ -163,6 +163,70 @@ Always pair a display font + body font. Variable fonts preferred.
 - Architecture: lib/data-strategies/ and lib/prompts/ for extensibility
 - No auth, no database, no scope creep
 
+## Current Architecture (M1 + M2, as of 2026-04-20)
+
+### Stack
+- **Next.js 14** (App Router), **TypeScript** (`strict: false`), **Tailwind CSS**
+- **Fonts:** Sora (display, `--font-sora`) + Manrope (body, `--font-manrope`) via `next/font/google`
+- **Colors:** custom Tailwind tokens — `navy-{500–950}`, `gold-{300–700}`
+- **Model:** `claude-opus-4-7` via `@anthropic-ai/sdk`
+
+### Request Flow
+1. User submits `{ subject, thesis }` → `POST /api/analyze`
+2. API route calls `getDataForSubject(subject)`:
+   - If subject looks like a ticker (all-caps or all-lowercase, 1–5 letters, e.g. `NVDA`, `nvda`) → `getStockData(ticker)` hits 4 FMP endpoints in parallel (quote, profile, key-metrics-ttm, income-statement)
+   - Otherwise → `stockData: null`, subject typed as commodity/asset_class/macro/unknown
+3. API route emits `stock_data` SSE event immediately (null for non-stocks) so the frontend can render MetricsCard before the brief arrives
+4. Claude prompt is built: for stocks, a `VERIFIED FINANCIAL DATA` block is prepended to the user message as ground truth
+5. Agentic loop (max 6 iterations) runs `claude-opus-4-7` with:
+   - `web_search_20250305` tool (Anthropic beta, `anthropic-beta: web-search-2025-03-05` header) on iteration 0 (`tool_choice: auto`)
+   - `generate_research_brief` tool forced on iteration 1+ (`tool_choice: { type: "tool", name: "..." }`)
+   - Falls back to no-web-search if the beta header is rejected
+6. Structured JSON from `generate_research_brief` tool input is emitted as `brief` SSE event
+7. Frontend parses SSE stream, renders MetricsCard immediately on `stock_data`, then full BriefDisplay on `brief`
+
+### File Map
+```
+app/
+  page.tsx                   — form, SSE consumer, stockData + brief state
+  layout.tsx                 — fonts, metadata, global CSS import
+  globals.css                — @tailwind directives, .brief-animate, .gold-shimmer, score-bar utilities
+  api/analyze/route.ts       — SSE handler, FMP injection, agentic Claude loop
+
+components/
+  BriefDisplay.tsx           — renders full brief; accepts stockData prop, renders MetricsCard above ConvictionBadge
+  ConvictionBadge.tsx        — tier pill + 2×2 sub-score grid with animated score bars
+  MetricsCard.tsx            — live stock metrics: price, range bar, market cap, margins, moving averages
+
+lib/
+  types.ts                   — ResearchBrief, Conviction, ConvictionScore, StockData interfaces
+  data-strategies/
+    index.ts                 — getDataForSubject(); isTickerLike() heuristic; SubjectData shape
+    stock.ts                 — getStockData(); 4-way parallel FMP fetch; file-based mock cache
+  mock-data/                 — {TICKER}.json cache files (committed; safe, no secrets)
+  prompts/
+    base.ts                  — BASE_SYSTEM_PROMPT + STOCK_ADDENDUM constants
+    stock.ts                 — STOCK_SYSTEM_PROMPT: base + 15 equity analysis rules
+    index.ts                 — getSystemPrompt(subjectType) router
+```
+
+### SSE Event Protocol
+| Event | Payload | When |
+|-------|---------|------|
+| `status` | `{ message: string }` | Throughout processing |
+| `stock_data` | `StockData \| null` | After FMP fetch, before Claude starts |
+| `brief` | `ResearchBrief` | When generate_research_brief tool completes |
+| `error` | `{ message: string }` | On any failure |
+
+### ResearchBrief Schema
+`thesis_summary`, `conviction` (overall_tier + 4 sub-scores with score + rationale), `supporting_evidence[]`, `risk_factors[]`, `counter_brief`, `bull_case`, `bear_case`, `bottom_line`
+
+### Known Limitations Going Into M2.5
+- Web search beta sometimes falls back silently (no retry or user-visible signal)
+- No ticker autocomplete or validation feedback — invalid tickers silently fall through to web-search-only mode
+- MetricsCard data is as fresh as the FMP cache file when USE_MOCK_FMP=true
+- `generate_research_brief` forces structured output but stream only shows sections after the full JSON is received (no per-section streaming)
+
 ## FMP API Quota Management
 FMP free tier: 250 calls/day. Each stock analysis makes 4 parallel FMP calls.
 
