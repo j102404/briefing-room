@@ -1,6 +1,7 @@
 export interface ConvictionScore {
   score: number
   rationale: string
+  supporting_claim_ids?: string[]
 }
 
 export interface Conviction {
@@ -11,16 +12,7 @@ export interface Conviction {
   risk_reward: ConvictionScore
 }
 
-export interface ResearchBrief {
-  thesis_summary: string
-  conviction: Conviction
-  supporting_evidence: string[]
-  risk_factors: string[]
-  counter_brief: string
-  bull_case: string
-  bear_case: string
-  bottom_line: string
-}
+export type { Brief } from '@/lib/analysis/types'
 
 export interface StockData {
   ticker: string

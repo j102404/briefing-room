@@ -1,0 +1,264 @@
+{
+  "subject": "AAPL",
+  "subject_type": "stock",
+  "thesis_atomic_claims": [
+    "Test stock data only"
+  ],
+  "thesis_internal_issues": [],
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "Apple reported record Q1 2026 revenue of $143.8 billion, up 16% year-over-year.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "claim": "Apple's Q1 2026 gross margin was 48.2%, exceeding the high end of 48-49% guidance.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "claim": "Apple Q1 2026 diluted EPS reached $2.84, up 19% year-over-year.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "claim": "iPhone revenue in Q1 2026 was $85.3 billion, up 23% year-over-year, with all-time records across every geographic segment.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "claim": "Services revenue reached $30 billion in Q1 2026, up 14% year-over-year, representing an all-time high.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "claim": "Apple's installed base of active devices exceeded 2.5 billion, reaching an all-time high across all product categories.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "claim": "Greater China revenue in Q1 2026 was up 38% year-over-year, driven by iPhone sales with all-time records for upgraders.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "claim": "Apple generated record operating cash flow of $53.9 billion in Q1 2026.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C9",
+      "claim": "Apple returned $32 billion to shareholders in Q1 2026, comprising $3.9 billion in dividends and $25 billion in open market share repurchases.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C10",
+      "claim": "Management expects Q2 2026 (March quarter) revenue to grow 13-16% year-over-year and gross margin to reach 48-49%.",
+      "type": "management_statement",
+      "verbatim_source_quote": "We expect our March total company revenue to grow by 13% to 16% year over year, which comprehends our best estimates of constrained iPhone supply during the quarter... We expect gross margin to be between 48-49%.",
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C11",
+      "claim": "CEO Tim Cook stated the company is currently constrained by advanced node capacity and supply chain flexibility limitations.",
+      "type": "management_statement",
+      "verbatim_source_quote": "We are currently constrained, and at this point, it is difficult to predict when supply and demand will balance. That constraint is driven by advanced node capacity and less flexibility in the supply chain.",
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C12",
+      "claim": "Management highlighted significant feature expansion of Apple Intelligence since launch, with most enabled iPhones using Apple Intelligence and collaboration with Google for future foundational models.",
+      "type": "management_statement",
+      "verbatim_source_quote": "Management highlighted significant feature expansion since launch, with most enabled iPhones using Apple Intelligence, and a collaboration with Google to power future foundational models and a more personalized Siri.",
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C13",
+      "claim": "Bank of America reiterated its Buy rating on AAPL with a $325 price target, forecasting 23.4% upside from the $263.40 share price at the time of the note.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "The firm reiterated its Buy rating, kept its $325 price target intact, and forecasts a healthy 23.4% upside from Apple's $263.40 share price at the time of the note.",
+      "source_url": "https://www.thestreet.com/investing/stocks/bank-of-america-sends-clear-message-on-apple-stock-before-earnings",
+      "source_date": "2026-04-21",
+      "confidence": "high"
+    },
+    {
+      "id": "C14",
+      "claim": "Counterpoint Research data indicates Apple was the top player in the global smartphone market in Q1 2026, with 21% market share.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Apple emerged as the top player in the global smartphone market in the first quarter of 2026... The Magnificent Seven company ended calendar Q1 with a 21% market share, becoming the top smar",
+      "source_url": "https://www.fool.com/investing/2026/04/18/incredible-news-apple-investors-stock-buy/",
+      "source_date": "2026-04-18",
+      "confidence": "high"
+    },
+    {
+      "id": "C15",
+      "claim": "Apple increased its smartphone shipments by 5% in Q1 2026, making it the only top-five smartphone manufacturer to record growth during the period.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Apple, however, managed to increase its shipments by 5%... it's the only one among the top five smartphone manufacturers to record growth during the quarter.",
+      "source_url": "https://www.fool.com/investing/2026/04/18/incredible-news-apple-investors-stock-buy/",
+      "source_date": "2026-04-18",
+      "confidence": "high"
+    },
+    {
+      "id": "C16",
+      "claim": "Overall smartphone sales dropped 6% year-over-year in Q1 2026 globally, while Samsung, Xiaomi, Oppo, and Vivo all experienced shipment declines.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Counterpoint notes that overall smartphone sales dropped by 6% year over year in Q1... Samsung, Xiaomi, Oppo, and Vivo all had shipments decline from the year-ago period.",
+      "source_url": "https://www.fool.com/investing/2026/04/18/incredible-news-apple-investors-stock-buy/",
+      "source_date": "2026-04-18",
+      "confidence": "high"
+    },
+    {
+      "id": "C17",
+      "claim": "Consensus estimates point to Q2 2026 normalized EPS of $1.95, GAAP EPS of $1.94, and revenue of $109.44 billion.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "According to Seeking Alpha, consensus estimates point to a normalized EPS of $1.95, a GAAP EPS of $1.94, and revenue of $109.44 billion.",
+      "source_url": "https://www.thestreet.com/investing/stocks/bank-of-america-sends-clear-message-on-apple-stock-before-earnings",
+      "source_date": "2026-04-21",
+      "confidence": "high"
+    },
+    {
+      "id": "C18",
+      "claim": "Over the last 90 days, 26 EPS estimates for Apple were revised upward and only 1 was revised downward.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Over the last 90 days, 26 EPS estimates were revised upward, and 1 was revised downward.",
+      "source_url": "https://www.thestreet.com/investing/stocks/bank-of-america-sends-clear-message-on-apple-stock-before-earnings",
+      "source_date": "2026-04-21",
+      "confidence": "high"
+    },
+    {
+      "id": "C19",
+      "claim": "Analyst Mark Ives of Wedbush Securities estimates approximately 315 million iPhones were at least four years old when the iPhone 17 series launched, supporting strong replacement demand.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Dan Ives of Wedbush Securities says that around 315 million iPhones were at least four years old when the iPhone 17 series was rolled out last year.",
+      "source_url": "https://www.fool.com/investing/2026/04/18/incredible-news-apple-investors-stock-buy/",
+      "source_date": "2026-04-18",
+      "confidence": "high"
+    },
+    {
+      "id": "C20",
+      "claim": "Apple's stock was essentially flat (down 0.6%) year-to-date as of mid-April 2026, despite volatility.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Apple's (AAPL +2.65%) share price has been somewhat volatile but essentially flat (down 0.6%) so far in 2026.",
+      "source_url": "https://www.fool.com/investing/2026/04/18/incredible-news-apple-investors-stock-buy/",
+      "source_date": "2026-04-18",
+      "confidence": "high"
+    },
+    {
+      "id": "C21",
+      "claim": "A negative analyst view argues Apple's valuation remains stretched at over 31x 2026 EPS, a mid-teens premium to big tech peers despite weaker earnings growth.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Valuation remains stretched at over 31x 2026 EPS, a mid-teens premium to big tech peers despite a weaker overall earnings growth profile.",
+      "source_url": "https://seekingalpha.com/article/4857828-apple-2026-major-change-expected",
+      "source_date": "2026-01-07",
+      "confidence": "medium"
+    },
+    {
+      "id": "C22",
+      "claim": "Apple's Q2 2026 earnings announcement is scheduled for April 30, 2026, with a conference call at 2:00 p.m. PT / 5:00 p.m. ET.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://9to5mac.com/2026/04/02/apple-sets-q2-2026-earnings-release-for-april-30/",
+      "source_date": "2026-04-02",
+      "confidence": "high"
+    },
+    {
+      "id": "C23",
+      "claim": "Apple's Q2 2026 guidance assumes global tariff rates, policies, and their application remain in effect and no worsening of global macroeconomic outlook.",
+      "type": "management_statement",
+      "verbatim_source_quote": "Importantly, the color we are providing assumes that global tariff rates, policies, and their application remain in effect as of this call, and the global macroeconomic outlook does not worsen from today.",
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C24",
+      "claim": "Operating expenses are expected to be between $18.4 billion and $18.7 billion in Q2 2026, driven by higher R&D on a year-over-year basis.",
+      "type": "management_statement",
+      "verbatim_source_quote": "We expect operating expenses to be between $18.4 billion and $18.7 billion, which is at a similar level to what we reported in December and driven by higher R&D on a year-over-year basis.",
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2026/01/29/apple-aapl-q1-2026-earnings-call-transcript/",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C25",
+      "claim": "Apple has allocated approximately $700 billion to share buyback programs since 2012, making it one of the world's leading companies in buyback volume.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Since Apple introduced its share buyback program in 2012, it has allocated approximately 700 billion USD to this initiative, making it one of the world's leading companies in terms of buyback volume.",
+      "source_url": "https://roboforex.com/beginners/analytics/forex-forecast/stocks/stocks-forecast-apple-aapl/",
+      "source_date": "2026-02-18",
+      "confidence": "medium"
+    }
+  ],
+  "fmp_data": {
+    "ticker": "AAPL",
+    "companyName": "Apple Inc.",
+    "sector": "Technology",
+    "industry": "Consumer Electronics",
+    "price": 273.05,
+    "marketCap": 4013268703584,
+    "pe": 34.191603979554586,
+    "eps": 7.985878643285487,
+    "dayLow": 270.29,
+    "dayHigh": 274.275,
+    "yearLow": 189.81,
+    "yearHigh": 288.62,
+    "priceAvg50": 260.5644,
+    "priceAvg200": 252.14175,
+    "volume": 34667241,
+    "peRatioTTM": 34.191603979554586,
+    "priceToBookRatioTTM": 45.662598275314664,
+    "debtToEquityTTM": 1.0262954983558226,
+    "returnOnEquityTTM": null,
+    "grossProfitMarginTTM": 47.32528803972297,
+    "operatingProfitMarginTTM": 32.38395195779779,
+    "netProfitMarginTTM": 27.036823631768275,
+    "revenue": 416161000000,
+    "revenueGrowthYoY": 6.425511782832739,
+    "grossProfit": 195201000000,
+    "operatingIncome": 133050000000,
+    "netIncome": 112010000000
+  }
+}

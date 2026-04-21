@@ -1,0 +1,242 @@
+{
+  "subject": "GME",
+  "subject_type": "stock",
+  "thesis_atomic_claims": [
+    "GME will reach $500 per share",
+    "The Reddit meme stock community is strong enough to drive another squeeze",
+    "Short sellers will be squeezed again like in 2021"
+  ],
+  "thesis_internal_issues": [
+    "Current stock price ~$23-24 means a $500 target requires 2000%+ return with no fundamental basis stated",
+    "Thesis relies on unquantified Reddit community strength without data on current investor coordination",
+    "No consideration given to dramatically reduced short interest since 2021 (from 140% to ~15%)"
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "GameStop reported Q4 2025 EPS of $0.49, beating consensus estimate of $0.31 by 58%.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://public.com/stocks/gme/earnings",
+      "source_date": "2026-03-24",
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "claim": "GameStop achieved a sharp profitability turnaround in fiscal 2025 with net income of $418.4 million vs $131.3 million prior year, despite net sales declining to $3.63B from $3.82B.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.stocktitan.net/sec-filings/GME/",
+      "source_date": "2026-03-23",
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "claim": "GameStop held $9.0 billion in cash and cash equivalents at fiscal year-end 2025, up from $4.8 billion prior year.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.stocktitan.net/sec-filings/GME/",
+      "source_date": "2026-03-23",
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "claim": "CEO Ryan Cohen purchased 1 million shares in January 2026 at weighted average price of $21.36, demonstrating insider confidence.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.stocktitan.net/sec-filings/GME/",
+      "source_date": "2026-01-21",
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "claim": "Current short interest stands at approximately 15% of outstanding shares (68M shares as of Dec 15, 2025), down dramatically from 140% in January 2021.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://shortinteresttracker.com/stock/GME",
+      "source_date": "2025-12-15",
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "claim": "During the 2021 short squeeze, GameStop stock rose from under $20 in early January 2021 to an all-time high of over $500 in pre-market value by January 28, 2021.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "As more people bought GameStop shares, the price skyrocketed from under $20 in early January 2021 to an all-time high of over $500 in pre-market value by January 28, 2021",
+      "source_url": "https://etonomics.com/2025/03/13/the-gamestop-short-squeeze/",
+      "source_date": "2025-03-13",
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "claim": "Short interest in January 2021 reached approximately 140% of available shares, with an estimated 70 million shares shorted against a 50 million share float.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "This culminated in a 3000% short squeeze as many shares underwent multiple shorting which collectively constituted 140% of the available shares (70 million shares against the total 50 million).",
+      "source_url": "https://etonomics.com/2025/03/13/the-gamestop-short-squeeze/",
+      "source_date": "2025-03-13",
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "claim": "Wall Street analyst consensus price target for GME is $13.50 per share, implying 43% downside from current ~$24 level.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Wall Street analysts have set a price target of $13.50, reflecting a 0.00% increase from the current stock price.",
+      "source_url": "https://public.com/stocks/gme/forecast-price-target",
+      "source_date": "2026-04-17",
+      "confidence": "high"
+    },
+    {
+      "id": "C9",
+      "claim": "CoinCodex's algorithmic forecast estimates GME will not reach $500, with highest expected price of $30.07 by 2026.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "According to our GameStop stock forecast, the price of GameStop stock will not reach $500. The highest expected price our algorithm estimates is $ 30.07 by 2026.",
+      "source_url": "https://coincodex.com/stock/GME/price-prediction/",
+      "source_date": "2026-02-10",
+      "confidence": "medium"
+    },
+    {
+      "id": "C10",
+      "claim": "Recent GME price moves have been driven less by fundamentals and more by changing sentiment and periodic short-squeeze speculation.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Recent moves have been driven less by fundamentals and more by changing sentiment, with ongoing retail investor interest keeping GameStop in the spotlight and periodic short-squeeze chatter sparking sudden bursts of trading activity.",
+      "source_url": "https://finance.yahoo.com/news/does-gamestop-334-five-year-surge-220758307.html",
+      "source_date": "2025-12-22",
+      "confidence": "high"
+    },
+    {
+      "id": "C11",
+      "claim": "GameStop's core business remains under structural pressure with double-digit revenue declines and sluggish gaming market conditions.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Stresses that revenues remain under pressure, with double digit declines, a sluggish gaming market, inflation and cautious consumers raising questions about the sustainability of recent profits.",
+      "source_url": "https://finance.yahoo.com/news/does-gamestop-334-five-year-surge-220758307.html",
+      "source_date": "2025-12-22",
+      "confidence": "high"
+    },
+    {
+      "id": "C12",
+      "claim": "Retail shareholders have accumulated approximately 75 million shares through direct registration (DRS), indicating concentrated retail ownership.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Points to a highly committed retail shareholder base, with around 75 million shares directly registered, insider buying and an active online community that could underpin resilience and potential short squeezes.",
+      "source_url": "https://finance.yahoo.com/news/does-gamestop-334-five-year-surge-220758307.html",
+      "source_date": "2025-12-22",
+      "confidence": "high"
+    },
+    {
+      "id": "C13",
+      "claim": "GameStop stock currently trades around $23-24, down 26.6% year-to-date and 26.3% over the last year despite 334% gain over 5 years.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://finance.yahoo.com/news/does-gamestop-334-five-year-surge-220758307.html",
+      "source_date": "2025-12-22",
+      "confidence": "high"
+    },
+    {
+      "id": "C14",
+      "claim": "GameStop stock is expected to increase by 117.3% to $51.11 over the next 12 months according to one analyst aggregator.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "GME stock price prediction for the next year: 51.1100USD, +117.30%.",
+      "source_url": "https://www.bitget.com/stock/nyse-gme/forecast",
+      "source_date": "2026-02-10",
+      "confidence": "medium"
+    },
+    {
+      "id": "C15",
+      "claim": "Borrow fees for short shares are low at 0.39%, with 6.1M shares available to borrow as of April 2026.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://shortinteresttracker.com/stock/GME",
+      "source_date": "2026-04-20",
+      "confidence": "high"
+    },
+    {
+      "id": "C16",
+      "claim": "GameStop purchased 4,710 Bitcoin between May-June 2025, representing a crypto treasury strategy.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://investor.gamestop.com/news-releases/news-details/2025/GameStop-Discloses-First-Quarter-2025-Results/default.aspx",
+      "source_date": "2025-06-10",
+      "confidence": "high"
+    },
+    {
+      "id": "C17",
+      "claim": "The 2021 short squeeze involved hedge funds like Melvin Capital that suffered 53% losses and required $2.75B in emergency capital infusions.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "By January 28, 2021, Melvin Capital, an investment fund that heavily shorted GameStop, had lost 30 percent of its value since the start of 2021, and by the end of January had suffered a loss of 53 percent of its investments.",
+      "source_url": "https://en.wikipedia.org/wiki/GameStop_short_squeeze",
+      "source_date": "2026-04-20",
+      "confidence": "high"
+    },
+    {
+      "id": "C18",
+      "claim": "Reddit retail investors coordinated through r/WallStreetBets and social media, with figures like Keith Gill ('DeepFuckingValue') driving the 2021 squeeze narrative.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Unlike traditional market movements driven by institutional investors, the GameStop short squeeze was fueled by retail traders who coordinated through social media platforms like Reddit and Twitter.",
+      "source_url": "https://etonomics.com/2025/03/13/the-gamestop-short-squeeze/",
+      "source_date": "2025-03-13",
+      "confidence": "high"
+    },
+    {
+      "id": "C19",
+      "claim": "GameStop has returned to profitability with adjusted EPS of $0.17 and $44.8M net profit in Q1 2025, with no long-term debt.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Highlights GameStop's return to profitability, with adjusted EPS of $0.17, a $44.8 million net profit and a strong balance sheet including $6.4 billion in cash and no long term debt.",
+      "source_url": "https://finance.yahoo.com/news/does-gamestop-334-five-year-surge-220758307.html",
+      "source_date": "2025-12-22",
+      "confidence": "high"
+    },
+    {
+      "id": "C20",
+      "claim": "GameStop is exploring potential acquisitions to pivot its business model amid fluctuating investor sentiment.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "The company is exploring potential acquisitions to pivot its business model amid fluctuating investor sentiment.",
+      "source_url": "https://finance.yahoo.com/quote/GME/",
+      "source_date": "2026-04-18",
+      "confidence": "medium"
+    },
+    {
+      "id": "C21",
+      "claim": "Multiple analyst forecasts for 2026 show a wide range from $13.50 to $141.94, reflecting uncertainty around business model sustainability.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Across these sources, third-party GameStop stock predictions span from the low teens to triple-digit theoretical values.",
+      "source_url": "https://capital.com/en-int/market-updates/gamestop-gme-stock-prediction-buy-or-sell-17-02-2026",
+      "source_date": "2026-02-16",
+      "confidence": "high"
+    },
+    {
+      "id": "C22",
+      "claim": "Days to cover ratio is 8.91 days at current trading volumes, substantially lower than during 2021 squeeze period.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://shortinteresttracker.com/stock/GME",
+      "source_date": "2025-12-15",
+      "confidence": "high"
+    },
+    {
+      "id": "C23",
+      "claim": "Trading on March 8, 2021 caused $609 million in losses from short sellers, demonstrating the extreme volatility during the 2021 squeeze.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Trading on March 8, specifically, caused $609 million in losses from short sellers.",
+      "source_url": "https://en.wikipedia.org/wiki/GameStop_short_squeeze",
+      "source_date": "2026-04-20",
+      "confidence": "high"
+    },
+    {
+      "id": "C24",
+      "claim": "GameStop's Q1 2025 net sales were $732.4M, down from $881.8M in Q1 2024, continuing the structural revenue decline.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://investor.gamestop.com/news-releases/news-details/2025/GameStop-Discloses-First-Quarter-2025-Results/default.aspx",
+      "source_date": "2025-06-10",
+      "confidence": "high"
+    },
+    {
+      "id": "C25",
+      "claim": "Following the March 2026 earnings beat, GME stock increased only 1.18%, suggesting limited market enthusiasm despite earnings surprise.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://unusualwhales.com/stock/GME/earnings",
+      "source_date": "2026-03-24",
+      "confidence": "high"
+    }
+  ],
+  "fmp_data": null
+}

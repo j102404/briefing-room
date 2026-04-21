@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import BriefDisplay from '@/components/BriefDisplay'
 import MetricsCard from '@/components/MetricsCard'
-import type { ResearchBrief, StockData } from '@/lib/types'
+import type { Brief, StockData } from '@/lib/types'
 
 const DEFAULT_SUBJECT = 'NVDA'
 const DEFAULT_THESIS =
@@ -20,7 +20,7 @@ function Spinner() {
 export default function Home() {
   const [subject, setSubject]     = useState(DEFAULT_SUBJECT)
   const [thesis, setThesis]       = useState(DEFAULT_THESIS)
-  const [brief, setBrief]         = useState<ResearchBrief | null>(null)
+  const [brief, setBrief]         = useState<Brief | null>(null)
   const [stockData, setStockData] = useState<StockData | null>(null)
   const [status, setStatus]       = useState<Status>('idle')
   const [statusMsg, setStatusMsg] = useState('')
@@ -79,7 +79,7 @@ export default function Home() {
               // May be null for non-stock subjects — that's expected
               setStockData(payload)
             } else if (eventType === 'brief') {
-              setBrief(payload as ResearchBrief)
+              setBrief(payload as Brief)
               setStatus('done')
               setStatusMsg('')
             } else if (eventType === 'error') {

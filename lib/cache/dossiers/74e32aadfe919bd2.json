@@ -1,0 +1,241 @@
+{
+  "subject": "Gold",
+  "subject_type": "commodity",
+  "thesis_atomic_claims": [
+    "Gold will hit $3,500 by year end 2026",
+    "Central banks are aggressively accumulating gold reserves",
+    "Central bank demand will drive gold prices significantly higher"
+  ],
+  "thesis_internal_issues": [
+    "Price target of $3,500 by year-end 2026 is materially below current spot price and all major bank forecasts. Current spot is ~$4,867/oz as of April 20, 2026; gold already reached $5,589 in January 2026. No credible analyst forecasts $3,500 for year-end 2026.",
+    "Thesis appears to underestimate the pace and magnitude of central bank buying already priced into the market—gold prices have surged 65% in 2025 and are already near all-time highs driven partly by the central bank demand the thesis cites."
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "Central banks are expected to purchase roughly 850 tonnes of gold in 2026, nearly the same level as 2025.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "The World Gold Council forecasts central banks to purchase roughly 850 tonnes of gold in 2026 — almost the same as last year.",
+      "source_url": "https://www.mining.com/central-banks-gold-buying-momentum-carries-into-2026/",
+      "source_date": "2026-03-24",
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "claim": "Central bank purchases in 2025 totaled 863 tonnes, the upper end of WGC's expected range and historically elevated.",
+      "type": "financial_fact",
+      "verbatim_source_quote": "Central bank purchases of 863t reached the upper end of our expected 2025 range; they remain historically elevated and geographically widespread but have slowed from their recent pace.",
+      "source_url": "https://www.gold.org/goldhub/research/gold-demand-trends/gold-demand-trends-full-year-2025",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "claim": "Central banks purchased 1,237 tonnes of gold in 2025, marking the third consecutive year above 1,000 tonnes.",
+      "type": "financial_fact",
+      "verbatim_source_quote": "Central banks purchased 1,237 tonnes of gold in 2025 — the third consecutive year above 1,000 tonnes",
+      "source_url": "https://onlinegold.org/analysis/central-bank-gold-reserves-2026/",
+      "source_date": "2026-02-17",
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "claim": "68% of central banks plan to increase gold holdings in 2026, up from 62% in 2025, citing gold's performance during crises and lack of counterparty risk.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "The WGC's Central Bank Gold Reserves Survey (March 2026) reveals that 68% of central banks plan to increase gold holdings in 2026, up from 62% in 2025, citing gold's performance during crises and its lack of counterparty risk.",
+      "source_url": "https://www.canadianminingreport.com/blog/central-banks-are-still-buying-gold-here-s-why",
+      "source_date": "2026-03-18",
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "claim": "J.P. Morgan raised its year-end 2026 gold price target to $6,300, up from an earlier $5,055 base case, citing a structural demand thesis built on continued central bank and investor buying.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "J.P. Morgan raised its year-end target to $6,300 in February 2026, up from an earlier base case of $5,055 [J.P. Morgan Global Research]. The bank argues its 'structural demand thesis' — built on continued central bank and investor buying",
+      "source_url": "https://goldsilver.com/industry-news/article/gold-price-forecast-2026-2027-key-predictions-from-top-analysts/",
+      "source_date": "2026-04-20",
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "claim": "Goldman Sachs has a price target of $5,400 per ounce by year-end 2026, citing continued central bank buying at current pace as a reasonable assumption.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Goldman's Senior Commodities Analyst, Lina Thomas said: 'Our forecast only takes into account that central banks keep buying at the pace that they have been buying, which is a very reasonable assumption given that EM central banks are still underweight gold.'",
+      "source_url": "https://www.devere-group.com/gold-price-predictions-yellow-metal-to-hit-6000-in-2026/",
+      "source_date": "2026-01-30",
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "claim": "People's Bank of China continued incremental monthly additions, reaching 2,308 tonnes in February 2026, marking its 16th consecutive month of buying.",
+      "type": "financial_fact",
+      "verbatim_source_quote": "A similar story for the People's Bank of China, its 16th consecutive month of buying saw gold reserves grow to 2,308t or 10% of its total reserves.",
+      "source_url": "https://www.gold.org/goldhub/gold-focus/2026/04/central-bank-gold-statistics-central-banks-stay-course-gold-february",
+      "source_date": "2026-04-07",
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "claim": "Gold hit an all-time peak of approximately $5,589 per ounce on January 28, 2026, before declining due to geopolitical tensions and interest rate concerns.",
+      "type": "financial_fact",
+      "verbatim_source_quote": "After surging to an all-time peak of nearly $5,600 an ounce earlier this year, gold has come under immense pressure in recent weeks",
+      "source_url": "https://www.mining.com/central-banks-gold-buying-momentum-carries-into-2026/",
+      "source_date": "2026-03-24",
+      "confidence": "high"
+    },
+    {
+      "id": "C9",
+      "claim": "Annual central bank gold purchases tripled from pre-2022 levels of 400-500 tonnes to over 1,000 tonnes in 2022-2024, representing a structural shift in reserve diversification.",
+      "type": "financial_fact",
+      "verbatim_source_quote": "Between 2022 and 2025, annual net purchases rose sharply from decade averages; central banks shifted from roughly 400–500 tonnes annually in the prior decade to around 1,000 tonnes per year in the high‑demand period starting 2022.",
+      "source_url": "https://www.bitget.com/wiki/which-central-banks-are-buying-gold",
+      "source_date": "2026-02-28",
+      "confidence": "high"
+    },
+    {
+      "id": "C10",
+      "claim": "National Bank of Poland added 102 tonnes of gold in 2025 and has targeted 700 tonnes total, positioning it among the world's top 10 gold holders.",
+      "type": "financial_fact",
+      "verbatim_source_quote": "The National Bank of Poland's announced target of 700 tonnes would elevate the country into elite global positioning among the world's top 10 gold holders.",
+      "source_url": "https://discoveryalert.com.au/central-bank-gold-buying-2026-monetary-sovereignty/",
+      "source_date": "2026-01-10",
+      "confidence": "high"
+    },
+    {
+      "id": "C11",
+      "claim": "Gold demand exceeded 5,000 tonnes for the first time in 2025, yielding an unprecedented total value of $555 billion (+45% year-over-year).",
+      "type": "financial_fact",
+      "verbatim_source_quote": "Total gold demand in 2025, including OTC, exceeded 5,000t for the first time. Combined with the record-breaking run in the gold price – setting 53 new all-time highs during the year – this yielded an unprecedented value of US$555bn (+45% y/y).",
+      "source_url": "https://www.gold.org/goldhub/research/gold-demand-trends/gold-demand-trends-full-year-2025",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C12",
+      "claim": "Wells Fargo raised its 2026 year-end gold price target to $6,100-$6,300 from $4,500-$4,700, citing sustained central bank demand as a core factor.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "The bank raised its 2026 year-end gold price target to $6,100 to $6,300 per ounce, up sharply from its previous forecast of $4,500 to $4,700.",
+      "source_url": "https://www.thestreet.com/investing/wells-fargo-resets-gold-price-target-for-the-rest-of-2026",
+      "source_date": "2026-03-27",
+      "confidence": "high"
+    },
+    {
+      "id": "C13",
+      "claim": "Central bank gold buying momentum has slowed in early 2026 compared to 2025 monthly averages; January saw only 5 tonnes of net purchases vs. 27 tonnes monthly average in 2025.",
+      "type": "financial_fact",
+      "verbatim_source_quote": "Central banks bought a net 5t in January, as momentum eased at the start of the year – this is compared to a monthly average of 27t in 2025.",
+      "source_url": "https://www.gold.org/goldhub/gold-focus/2026/03/central-bank-gold-statistics-momentum-eases-january-while-demand-base",
+      "source_date": "2026-03-03",
+      "confidence": "high"
+    },
+    {
+      "id": "C14",
+      "claim": "Central banks are price-sensitive; they accelerate purchases when prices correct rather than selling, creating a structural price floor for gold.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Sovereign buyers are price-sensitive in a specific way: declines are buying opportunities, not selling triggers. Unlike retail investors or hedge funds that might panic-sell on a 10% drop, central banks accelerate purchasing when price corrects.",
+      "source_url": "https://onlinegold.org/analysis/central-bank-gold-reserves-2026/",
+      "source_date": "2026-02-17",
+      "confidence": "high"
+    },
+    {
+      "id": "C15",
+      "claim": "De-dollarization efforts by emerging markets and BRICS+ nations drive central bank gold purchases to reduce currency risk and counterparty exposure.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "The ongoing de-dollarization strategy continues to drive central banks in China, India, and ASEAN nations to maintain a steady pace of acquisition.",
+      "source_url": "https://www.mexc.com/learn/article/central-bank-gold-sales-in-2026-decoding-the-global-reserve-shift/1",
+      "source_date": "2026-01-01",
+      "confidence": "medium"
+    },
+    {
+      "id": "C16",
+      "claim": "J.P. Morgan expects gold to average $5,055/oz in Q4 2026 and rise toward $5,400/oz by end of 2027, with structural demand thesis involving central banks and investors.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Overall, J.P. Morgan Global Research is forecasting prices to average $5,055/oz by the final quarter of 2026, rising toward $5,400/oz by the end of 2027.",
+      "source_url": "https://www.jpmorgan.com/insights/global-research/commodities/gold-prices",
+      "source_date": "2026-04-20",
+      "confidence": "high"
+    },
+    {
+      "id": "C17",
+      "claim": "UBS forecasts gold could reach $6,200 by year-end 2026, with an upside scenario to $7,200 if geopolitical risks escalate further.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "UBS raised its year-end target to $6,200, up from $5,000, with an upside scenario of $7,200 if geopolitical risks escalate further",
+      "source_url": "https://goldsilver.com/industry-news/article/gold-price-forecast-2026-2027-key-predictions-from-top-analysts/",
+      "source_date": "2026-04-20",
+      "confidence": "high"
+    },
+    {
+      "id": "C18",
+      "claim": "95% of central banks surveyed expect global central bank gold reserves to increase in the next 12 months as of early 2026.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "The near majority (95%) expected global central bank gold reserves to increase in the next 12 months.",
+      "source_url": "https://www.cmegroup.com/articles/2026/precious-metals-outlook-2026-market-dynamics-following-a-record-breaking-year.html",
+      "source_date": "2026-01-08",
+      "confidence": "high"
+    },
+    {
+      "id": "C19",
+      "claim": "Gold prices set 53 new all-time highs during 2025, driven by a convergence of central bank buying, ETF inflows, and geopolitical uncertainty.",
+      "type": "financial_fact",
+      "verbatim_source_quote": "Combined with the record-breaking run in the gold price – setting 53 new all-time highs during the year – this yielded an unprecedented value of US$555bn (+45% y/y).",
+      "source_url": "https://www.gold.org/goldhub/research/gold-demand-trends/gold-demand-trends-full-year-2025",
+      "source_date": "2026-01-29",
+      "confidence": "high"
+    },
+    {
+      "id": "C20",
+      "claim": "Central bank gold demand is expected to normalize slightly to approximately 755 tonnes in 2026 due to mechanical changes—higher prices require fewer tonnes to meet reserve percentage targets.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Around 755 tonnes of central bank purchases are expected in 2026—a step lower than the peak of the last three years of more than 1,000+ tonnes, but still elevated when compared with pre-2022 averages, which were closer to 400–500 tonnes.",
+      "source_url": "https://www.jpmorgan.com/insights/global-research/commodities/gold-prices",
+      "source_date": "2026-04-20",
+      "confidence": "high"
+    },
+    {
+      "id": "C21",
+      "claim": "Most major bank consensus for year-end 2026 gold prices ranges from $5,400 (Goldman Sachs) to $6,300 (J.P. Morgan and Wells Fargo), with no major bank forecasting below $5,000.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "The major bank consensus for year-end 2026 now ranges from $5,400 (Goldman Sachs) to $6,300 (J.P. Morgan and Wells Fargo)",
+      "source_url": "https://goldsilver.com/industry-news/article/gold-price-forecast-2026-2027-key-predictions-from-top-analysts/",
+      "source_date": "2026-04-20",
+      "confidence": "high"
+    },
+    {
+      "id": "C22",
+      "claim": "Gold gained approximately 65% in 2025, its strongest annual performance since 1979.",
+      "type": "financial_fact",
+      "verbatim_source_quote": "Gold gained around 65% in 2025 — its strongest annual performance since 1979",
+      "source_url": "https://goldsilver.com/industry-news/article/gold-price-forecast-2026-2027-key-predictions-from-top-analysts/",
+      "source_date": "2026-04-20",
+      "confidence": "high"
+    },
+    {
+      "id": "C23",
+      "claim": "Central bank purchases contributed approximately 18% of global gold demand in 2025, with 863 tonnes out of ~5,000 tonnes total demand.",
+      "type": "analyst_inference",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.canadianminingreport.com/blog/central-banks-are-still-buying-gold-here-s-why",
+      "source_date": "2026-03-18",
+      "confidence": "high"
+    },
+    {
+      "id": "C24",
+      "claim": "J.P. Morgan expects 190 tonnes per quarter of central bank demand in 2026, contributing to quarterly investor and central bank demand averaging 585 tonnes.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Looking to 2026, we see around 585 tonnes of quarterly investor and central bank demand on average, comprising around 190 tonnes a quarter from central banks",
+      "source_url": "https://www.jpmorgan.com/insights/global-research/commodities/gold-prices",
+      "source_date": "2026-04-20",
+      "confidence": "high"
+    },
+    {
+      "id": "C25",
+      "claim": "Gold's rally in 2025 was not linear but structural, driven by official reserve diversification and investor demand that has further to run in 2026.",
+      "type": "management_statement",
+      "verbatim_source_quote": "While this rally in gold has not, and will not, be linear, we believe the trends driving this rebasing higher in gold prices are not exhausted. The long-term trend of official reserve and investor diversification into gold has further to run.",
+      "source_url": "https://www.jpmorgan.com/insights/global-research/commodities/gold-prices",
+      "source_date": "2026-04-20",
+      "confidence": "high"
+    }
+  ],
+  "fmp_data": null
+}

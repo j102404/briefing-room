@@ -32,11 +32,11 @@ function writeMock(ticker: string, data: StockData) {
   }
 }
 
-async function fmpFetch(endpoint: string): Promise<any> {
+async function fmpFetch(endpoint: string, params: Record<string, string> = {}): Promise<any> {
   const key = process.env.FMP_API_KEY
   if (!key) throw new Error('FMP_API_KEY not set')
-  const sep = endpoint.includes('?') ? '&' : '?'
-  const url = `${FMP_BASE}${endpoint}${sep}apikey=${key}`
+  const qs = new URLSearchParams({ ...params, apikey: key }).toString()
+  const url = `${FMP_BASE}${endpoint}?${qs}`
   const res = await fetch(url, { cache: 'no-store' })
   if (!res.ok) throw new Error(`FMP ${endpoint} → ${res.status}`)
   return res.json()
@@ -52,15 +52,16 @@ export async function getStockData(ticker: string): Promise<StockData | null> {
   if (useMock) {
     const cached = readMock(ticker)
     if (cached) return cached
-    // Fall through to live fetch if cache miss
+    // Fall through to live fetch on cache miss
   }
 
   try {
-    const [quoteArr, profileArr, metricsArr, incomeArr] = await Promise.all([
-      fmpFetch(`/api/v3/quote/${ticker}`),
-      fmpFetch(`/api/v3/profile/${ticker}`),
-      fmpFetch(`/api/v3/key-metrics-ttm/${ticker}`),
-      fmpFetch(`/api/v3/income-statement/${ticker}?limit=2`),
+    const sym = { symbol: ticker }
+    const [quoteArr, profileArr, ratiosArr, incomeArr] = await Promise.all([
+      fmpFetch('/stable/quote', sym),
+      fmpFetch('/stable/profile', sym),
+      fmpFetch('/stable/ratios-ttm', sym),
+      fmpFetch('/stable/income-statement', { ...sym, limit: '2' }),
     ])
 
     // FMP returns an empty array for unknown tickers
@@ -69,7 +70,7 @@ export async function getStockData(ticker: string): Promise<StockData | null> {
 
     const q = quoteArr[0]
     const p = profileArr[0]
-    const m = Array.isArray(metricsArr) ? (metricsArr[0] ?? {}) : {}
+    const r = Array.isArray(ratiosArr) ? (ratiosArr[0] ?? {}) : {}
     const inc0 = Array.isArray(incomeArr) ? incomeArr[0] : null
     const inc1 = Array.isArray(incomeArr) ? incomeArr[1] : null
 
@@ -83,11 +84,11 @@ export async function getStockData(ticker: string): Promise<StockData | null> {
       companyName: p.companyName ?? q.name ?? ticker,
       sector: p.sector ?? '',
       industry: p.industry ?? '',
-      // Quote
+      // Quote (stable endpoint)
       price: q.price,
       marketCap: q.marketCap,
-      pe: q.pe ?? null,
-      eps: q.eps ?? null,
+      pe: r.priceToEarningsRatioTTM ?? null,
+      eps: r.netIncomePerShareTTM ?? null,
       dayLow: q.dayLow,
       dayHigh: q.dayHigh,
       yearLow: q.yearLow,
@@ -95,15 +96,15 @@ export async function getStockData(ticker: string): Promise<StockData | null> {
       priceAvg50: q.priceAvg50,
       priceAvg200: q.priceAvg200,
       volume: q.volume,
-      // Key metrics TTM — FMP returns margins as decimals (0.753 → 75.3%)
-      peRatioTTM: m.peRatioTTM ?? null,
-      priceToBookRatioTTM: m.priceToBookRatioTTM ?? null,
-      debtToEquityTTM: m.debtToEquityTTM ?? null,
-      returnOnEquityTTM: pct(m.returnOnEquityTTM),
-      grossProfitMarginTTM: pct(m.grossProfitMarginTTM),
-      operatingProfitMarginTTM: pct(m.operatingProfitMarginTTM),
-      netProfitMarginTTM: pct(m.netProfitMarginTTM),
-      // Income statement
+      // Ratios TTM — margins are decimals (0.71 → 71%), multiply via pct()
+      peRatioTTM: r.priceToEarningsRatioTTM ?? null,
+      priceToBookRatioTTM: r.priceToBookRatioTTM ?? null,
+      debtToEquityTTM: r.debtToEquityRatioTTM ?? null,
+      returnOnEquityTTM: null, // not available in stable ratios-ttm
+      grossProfitMarginTTM: pct(r.grossProfitMarginTTM),
+      operatingProfitMarginTTM: pct(r.operatingProfitMarginTTM),
+      netProfitMarginTTM: pct(r.netProfitMarginTTM),
+      // Income statement (most recent annual)
       revenue: inc0?.revenue ?? null,
       revenueGrowthYoY,
       grossProfit: inc0?.grossProfit ?? null,

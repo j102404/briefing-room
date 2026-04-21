@@ -1,0 +1,264 @@
+{
+  "subject": "NVDA",
+  "subject_type": "stock",
+  "thesis_atomic_claims": [
+    "Just checking stock data loads"
+  ],
+  "thesis_internal_issues": [],
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "Fiscal 2026 total revenue reached $215.9 billion, representing 65% year-over-year growth.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "claim": "Fiscal 2026 GAAP gross margin was 71.1%; non-GAAP gross margin was 71.3%.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "claim": "Fiscal 2026 GAAP diluted EPS was $4.90; non-GAAP EPS was $4.77.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "claim": "Q4 FY2026 revenue was $68.1 billion, up 73% year-over-year and 20% sequentially.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "claim": "Q1 FY2026 revenue was $44.1 billion, up 69% year-over-year and 12% sequentially.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2026",
+      "source_date": "2025-05-28",
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "claim": "On April 9, 2025, NVIDIA was informed by the U.S. government that export licenses are required for H20 products to China.",
+      "type": "management_statement",
+      "verbatim_source_quote": "On April 9, 2025, NVIDIA was informed by the U.S. government that a license is required for exports of its H20 products into the China market.",
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2026",
+      "source_date": "2025-05-28",
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "claim": "NVIDIA incurred a $4.5 billion charge in Q1 FY2026 for H20 excess inventory and purchase obligations.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2026",
+      "source_date": "2025-05-28",
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "claim": "H20 sales in Q1 FY2026 were $4.6 billion prior to export licensing requirements, with $2.5 billion of additional H20 revenue unable to ship.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2026",
+      "source_date": "2025-05-28",
+      "confidence": "high"
+    },
+    {
+      "id": "C9",
+      "claim": "Data Center revenue for fiscal 2026 was $197.3 billion, up from $115.2 billion in fiscal 2025.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://fortune.com/2026/02/25/nvidia-nvda-earnings-q4-results-jensen-huang/",
+      "source_date": "2026-02-26",
+      "confidence": "high"
+    },
+    {
+      "id": "C10",
+      "claim": "CEO Jensen Huang stated: 'Computing demand is growing exponentially — the agentic AI inflection point has arrived.'",
+      "type": "management_statement",
+      "verbatim_source_quote": "Computing demand is growing exponentially — the agentic AI inflection point has arrived.",
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C11",
+      "claim": "Q4 FY2026 Data Center revenue reached $64.9 billion (implied from total and segment data).",
+      "type": "analyst_inference",
+      "verbatim_source_quote": null,
+      "source_url": "https://fortune.com/2026/02/25/nvidia-nvda-earnings-q4-results-jensen-huang/",
+      "source_date": "2026-02-26",
+      "confidence": "medium"
+    },
+    {
+      "id": "C12",
+      "claim": "Management guided for Q1 FY2027 revenue of $78.0 billion, plus or minus 2%.",
+      "type": "management_statement",
+      "verbatim_source_quote": "Revenue is expected to be $78.0 billion, plus or minus 2%.",
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C13",
+      "claim": "NVIDIA is not assuming any Data Center compute revenue from China in Q1 FY2027 outlook.",
+      "type": "management_statement",
+      "verbatim_source_quote": "NVIDIA is not assuming any Data Center compute revenue from China in its outlook.",
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C14",
+      "claim": "During fiscal 2026, NVIDIA returned $41.1 billion to shareholders through share repurchases and cash dividends.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C15",
+      "claim": "Q3 FY2026 Data Center revenue was a record $51.2 billion, up 66% year-over-year.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2026",
+      "source_date": "2025-11-19",
+      "confidence": "high"
+    },
+    {
+      "id": "C16",
+      "claim": "Q3 FY2026 total revenue was $57.0 billion, up 62% year-over-year and 22% sequentially.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2026",
+      "source_date": "2025-11-19",
+      "confidence": "high"
+    },
+    {
+      "id": "C17",
+      "claim": "Q2 FY2026 revenue was $46.7 billion, up 56% year-over-year and 6% sequentially.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-second-quarter-fiscal-2026",
+      "source_date": "2025-08-27",
+      "confidence": "high"
+    },
+    {
+      "id": "C18",
+      "claim": "Q1 FY2026 Data Center revenue was $39.1 billion, up 73% year-over-year and 10% sequentially.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2026",
+      "source_date": "2025-05-28",
+      "confidence": "high"
+    },
+    {
+      "id": "C19",
+      "claim": "Management expects sustained sequential revenue growth throughout calendar 2026, exceeding the $500 billion Blackwell and Rubin revenue opportunity previously shared.",
+      "type": "management_statement",
+      "verbatim_source_quote": "We expect sequential revenue growth throughout calendar 2026, exceeding what was included in the $500 billion Blackwell and Rubin revenue opportunity we shared last year.",
+      "source_url": "https://finance.yahoo.com/quote/NVDA/earnings/NVDA-Q4-2026-earnings_call-409967.html",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C20",
+      "claim": "Free cash flow for fiscal 2026 was $97 billion; Q4 FY2026 free cash flow was $35 billion.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://finance.yahoo.com/news/nvidia-corp-nvda-q4-2026-050255428.html",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C21",
+      "claim": "Analyst consensus expected Q4 FY2026 EPS of $1.52; NVIDIA reported $1.62 GAAP EPS, beating by 6.58%.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "NVIDIA Corporation reported strong financial results for the fourth quarter of fiscal year 2026, surpassing Wall Street's expectations with an earnings per share (EPS) of $1.62, beating the forecasted $1.52.",
+      "source_url": "https://www.investing.com/news/transcripts/earnings-call-transcript-nvidia-q4-2026-beats-expectations-stock-rises-93CH-4526215",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C22",
+      "claim": "Analyst consensus expected Q4 FY2026 revenue of $65.56 billion; NVIDIA reported $68.1 billion, beating by 3.87%.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Revenue also exceeded predictions, reaching $68.1 billion compared to the anticipated $65.56 billion, marking a 3.87% surprise.",
+      "source_url": "https://www.investing.com/news/transcripts/earnings-call-transcript-nvidia-q4-2026-beats-expectations-stock-rises-93CH-4526215",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C23",
+      "claim": "Q1 FY2027 revenue guidance of $78 billion beat analyst consensus estimate of $72.6 billion by approximately 7.4%.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Analysts were expecting $72.6 billion.",
+      "source_url": "https://www.cnbc.com/2026/02/25/nvidia-nvda-earnings-report-q4-2026.html",
+      "source_date": "2026-02-26",
+      "confidence": "high"
+    },
+    {
+      "id": "C24",
+      "claim": "Cantor Fitzgerald reiterated NVDA as a 'top pick' for 2026, arguing that recent pullback created an attractive entry point.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "The firm recently reiterated NVDA as a 'top pick,' arguing that the AI chip stock's pullback has created an attractive entry point.",
+      "source_url": "https://finance.yahoo.com/news/nvidia-stock-ripe-gains-2026-143002055.html",
+      "source_date": "2025-12-27",
+      "confidence": "high"
+    },
+    {
+      "id": "C25",
+      "claim": "Total supply-related commitments rose from $50.3 billion at end of Q3 FY2026 to $95.2 billion at end of Q4 FY2026.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://fortune.com/2026/02/25/nvidia-nvda-earnings-q4-results-jensen-huang/",
+      "source_date": "2026-02-26",
+      "confidence": "high"
+    }
+  ],
+  "fmp_data": {
+    "ticker": "NVDA",
+    "companyName": "NVIDIA Corporation",
+    "sector": "Technology",
+    "industry": "Semiconductors",
+    "price": 202.06,
+    "marketCap": 4911068128451,
+    "pe": 40.90104891435615,
+    "eps": 4.94021560236998,
+    "dayLow": 197.8397,
+    "dayHigh": 202.17,
+    "yearLow": 95.04,
+    "yearHigh": 212.19,
+    "priceAvg50": 183.2966,
+    "priceAvg200": 181.77365,
+    "volume": 118513377,
+    "peRatioTTM": 40.90104891435615,
+    "priceToBookRatioTTM": 31.221136604934742,
+    "debtToEquityTTM": 0.07255249756823254,
+    "returnOnEquityTTM": null,
+    "grossProfitMarginTTM": 71.06808435754708,
+    "operatingProfitMarginTTM": 60.38168363141272,
+    "netProfitMarginTTM": 55.60253406070261,
+    "revenue": 215938000000,
+    "revenueGrowthYoY": 65.4735357900948,
+    "grossProfit": 153463000000,
+    "operatingIncome": 130387000000,
+    "netIncome": 120067000000
+  }
+}

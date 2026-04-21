@@ -160,30 +160,37 @@ Always pair a display font + body font. Variable fonts preferred.
 - Dark, refined, editorial aesthetic — NOT terminal themed
 - No generic fonts (Inter, Roboto, Poppins, Montserrat, Open Sans are banned)
 - Use 21st.dev components where appropriate
-- Architecture: lib/data-strategies/ and lib/prompts/ for extensibility
+- Architecture: lib/data-strategies/ and lib/analysis/ for extensibility
 - No auth, no database, no scope creep
 
-## Current Architecture (M1 + M2, as of 2026-04-20)
+## Current Architecture (M2.5 — two-stage dossier + synthesizer, as of 2026-04-20)
 
 ### Stack
 - **Next.js 14** (App Router), **TypeScript** (`strict: false`), **Tailwind CSS**
 - **Fonts:** Sora (display, `--font-sora`) + Manrope (body, `--font-manrope`) via `next/font/google`
 - **Colors:** custom Tailwind tokens — `navy-{500–950}`, `gold-{300–700}`
-- **Model:** `claude-opus-4-7` via `@anthropic-ai/sdk`
+- **Models:** Haiku 4.5 (dossier) + Sonnet 4.6 with extended thinking (synthesizer)
+
+### Model Tiering
+| Stage | Model | Env Var | Rationale |
+|-------|-------|---------|-----------|
+| Stage A (Dossier) | `claude-haiku-4-5-20251001` | `DOSSIER_MODEL` | Extraction task — Haiku is sufficient at ~70% lower cost |
+| Stage B (Synthesizer) | `claude-sonnet-4-6` | `SYNTHESIZER_MODEL` | Reasoning task — Sonnet + thinking handles it well |
+
+To upgrade synthesizer quality: set `SYNTHESIZER_MODEL=claude-opus-4-7` (no code changes needed).
+Extended thinking level: `SYNTHESIZER_THINKING=high` (options: `off`, `low`, `medium`, `high`).
 
 ### Request Flow
 1. User submits `{ subject, thesis }` → `POST /api/analyze`
 2. API route calls `getDataForSubject(subject)`:
-   - If subject looks like a ticker (all-caps or all-lowercase, 1–5 letters, e.g. `NVDA`, `nvda`) → `getStockData(ticker)` hits 4 FMP endpoints in parallel (quote, profile, key-metrics-ttm, income-statement)
+   - If subject looks like a ticker → `getStockData(ticker)` hits 4 FMP endpoints in parallel
    - Otherwise → `stockData: null`, subject typed as commodity/asset_class/macro/unknown
-3. API route emits `stock_data` SSE event immediately (null for non-stocks) so the frontend can render MetricsCard before the brief arrives
-4. Claude prompt is built: for stocks, a `VERIFIED FINANCIAL DATA` block is prepended to the user message as ground truth
-5. Agentic loop (max 6 iterations) runs `claude-opus-4-7` with:
-   - `web_search_20250305` tool (Anthropic beta, `anthropic-beta: web-search-2025-03-05` header) on iteration 0 (`tool_choice: auto`)
-   - `generate_research_brief` tool forced on iteration 1+ (`tool_choice: { type: "tool", name: "..." }`)
-   - Falls back to no-web-search if the beta header is rejected
-6. Structured JSON from `generate_research_brief` tool input is emitted as `brief` SSE event
-7. Frontend parses SSE stream, renders MetricsCard immediately on `stock_data`, then full BriefDisplay on `brief`
+3. Emits `stock_data` SSE event immediately so MetricsCard renders before the brief arrives
+4. **Stage A — Dossier (Haiku 4.5):** agentic loop (max 8 iter) with `web_search_20250305` + `generate_dossier` tools. Produces a `Dossier` with 15-25 typed evidence claims, thesis atomic claims, and internal issue flags. Result is cached to disk when `USE_DOSSIER_CACHE=true`.
+5. Emits `dossier_ready` SSE event (frontend ignores for now — for future UI)
+6. **Stage B — Synthesizer (Sonnet 4.6):** single call with extended thinking enabled + `generate_research_brief` tool. Executes 7-step rubric: restate → scope → score input quality → valuation bridge → score thesis quality → write narrative → bottom line. Falls back to no-thinking if extended thinking fails.
+7. Deterministic validators run: math check on valuation bridge, claim ID reference check, non-empty field check. Issues emitted as `validation_warnings` SSE event.
+8. Emits `brief` SSE event (new `Brief` schema — see below)
 
 ### File Map
 ```
@@ -191,41 +198,61 @@ app/
   page.tsx                   — form, SSE consumer, stockData + brief state
   layout.tsx                 — fonts, metadata, global CSS import
   globals.css                — @tailwind directives, .brief-animate, .gold-shimmer, score-bar utilities
-  api/analyze/route.ts       — SSE handler, FMP injection, agentic Claude loop
+  api/analyze/route.ts       — SSE handler, orchestrates Stage A + Stage B pipeline
 
 components/
-  BriefDisplay.tsx           — renders full brief; accepts stockData prop, renders MetricsCard above ConvictionBadge
-  ConvictionBadge.tsx        — tier pill + 2×2 sub-score grid with animated score bars
-  MetricsCard.tsx            — live stock metrics: price, range bar, market cap, margins, moving averages
+  BriefDisplay.tsx           — renders full brief; maps thesis_quality → ConvictionBadge; shows valuation bridge + input quality banner
+  ConvictionBadge.tsx        — tier pill + 2×2 sub-score grid (unchanged internals)
+  MetricsCard.tsx            — live stock metrics (unchanged)
 
 lib/
-  types.ts                   — ResearchBrief, Conviction, ConvictionScore, StockData interfaces
+  types.ts                   — StockData, Conviction, ConvictionScore interfaces; re-exports Brief
+  analysis/
+    types.ts                 — DossierClaim, Dossier, Brief, ThesisQualityScore, ValuationBridge interfaces
+    dossier.ts               — buildDossier(): Stage A agentic loop with Haiku + web search
+    synthesizer.ts           — synthesizeBrief(): Stage B with Sonnet + extended thinking
+    validators.ts            — runValidators(): deterministic math + claim ID + non-empty checks
+  cache/
+    dossier-cache.ts         — file-based dossier cache (keyed by SHA256(subject+thesis).slice(16))
+    dossiers/                — cached dossier JSON files (gitignored in prod, useful for dev iteration)
   data-strategies/
-    index.ts                 — getDataForSubject(); isTickerLike() heuristic; SubjectData shape
+    index.ts                 — getDataForSubject(); isTickerLike() heuristic
     stock.ts                 — getStockData(); 4-way parallel FMP fetch; file-based mock cache
   mock-data/                 — {TICKER}.json cache files (committed; safe, no secrets)
-  prompts/
-    base.ts                  — BASE_SYSTEM_PROMPT + STOCK_ADDENDUM constants
-    stock.ts                 — STOCK_SYSTEM_PROMPT: base + 15 equity analysis rules
-    index.ts                 — getSystemPrompt(subjectType) router
 ```
 
 ### SSE Event Protocol
 | Event | Payload | When |
 |-------|---------|------|
 | `status` | `{ message: string }` | Throughout processing |
-| `stock_data` | `StockData \| null` | After FMP fetch, before Claude starts |
-| `brief` | `ResearchBrief` | When generate_research_brief tool completes |
+| `stock_data` | `StockData \| null` | After FMP fetch, before Stage A |
+| `dossier_ready` | `{ claim_count, subject_type, thesis_atomic_claims, thesis_internal_issues }` | After Stage A completes |
+| `brief` | `Brief` | After Stage B completes |
+| `validation_warnings` | `{ warnings: string[] }` | If validators flag issues (non-blocking) |
 | `error` | `{ message: string }` | On any failure |
 
-### ResearchBrief Schema
-`thesis_summary`, `conviction` (overall_tier + 4 sub-scores with score + rationale), `supporting_evidence[]`, `risk_factors[]`, `counter_brief`, `bull_case`, `bear_case`, `bottom_line`
+### Brief Schema (M2.5)
+- `input_quality`: `{ score: 1-10, issues: string[] }` — coherence, accuracy, internal consistency of user's input
+- `thesis_restatement`: 1-2 sentences, only what user claimed
+- `thesis_does_not_claim`: 3-5 positions user did NOT take (prevents strawmanning)
+- `valuation_bridge`: `{ available, implied_eps?, implied_multiple?, consensus_eps?, consensus_multiple?, gap_analysis? }` — only populated for stocks with price targets
+- `thesis_quality`: `{ overall_tier, macro_alignment, valuation_support, catalyst_clarity, risk_reward }` — each sub-score has `score`, `rationale`, `supporting_claim_ids[]`
+- `supporting_evidence`: `Array<{ text, claim_ids[] }>` — each item cites dossier claim IDs
+- `risk_factors`: `Array<{ text, claim_ids[] }>` — same
+- `counter_brief`, `bull_case`, `bear_case`, `bottom_line`: narrative strings
+- `sources`: subset of `DossierClaim[]` actually cited in the brief
 
-### Known Limitations Going Into M2.5
-- Web search beta sometimes falls back silently (no retry or user-visible signal)
-- No ticker autocomplete or validation feedback — invalid tickers silently fall through to web-search-only mode
-- MetricsCard data is as fresh as the FMP cache file when USE_MOCK_FMP=true
-- `generate_research_brief` forces structured output but stream only shows sections after the full JSON is received (no per-section streaming)
+### Key Design Invariants
+- `input_quality` and `thesis_quality` are SEPARATE rubrics — a broken price target lowers input_quality but must not drag thesis_quality score
+- Every `supporting_evidence` and `risk_factors` item must cite dossier claim IDs (validated by `validators.ts`)
+- No fabricated precision: synthesizer prompt forbids specific % / bps / $ figures not traceable to a dossier claim
+- `verbatim_source_quote` is required for all `management_statement` and `third_party_claim` dossier entries
+
+### Known Limitations (M2.5)
+- Dossier web search falls back silently if beta header is rejected — no retry or user-visible signal
+- Extended thinking adds ~30-60s to synthesis time; can disable with `SYNTHESIZER_THINKING=off`
+- Valuation bridge requires price target in thesis text — model infers it, no explicit parsing
+- Dossier cache is off by default (`USE_DOSSIER_CACHE=false`) to ensure fresh evidence in production
 
 ## FMP API Quota Management
 FMP free tier: 250 calls/day. Each stock analysis makes 4 parallel FMP calls.

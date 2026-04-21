@@ -1,0 +1,276 @@
+{
+  "subject": "NVDA",
+  "subject_type": "stock",
+  "thesis_atomic_claims": [
+    "NVDA is the defining infrastructure play of the AI decade",
+    "CUDA moat is 10+ years deep",
+    "Hyperscalers are locked in to NVIDIA hardware",
+    "Every serious AI lab runs on NVIDIA hardware",
+    "Data center revenue hit $47.5B in FY2025, up 142% YoY",
+    "Blackwell is ramping",
+    "Sovereign AI demand is just beginning",
+    "This is still early innings",
+    "Inference alone will triple NVIDIA's TAM by 2027",
+    "12-month price target of $175"
+  ],
+  "thesis_internal_issues": [
+    "Thesis states 'Data center revenue hit $47.5B in FY2025' but verified data shows $115.2B (full-year FY2025 data center revenue) — specific quarterly number may be outdated or mislabeled",
+    "Price target of $175 is below verified current price of $202.06, creating internal contradiction with 'long' positioning"
+  ],
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "NVIDIA reported full-year FY2025 data center revenue of $115.2 billion, representing 142% year-over-year growth.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025",
+      "source_date": "2025-02-26",
+      "confidence": "high"
+    },
+    {
+      "id": "C2",
+      "claim": "Q4 FY2025 data center revenue was $35.6 billion, up 93% year-over-year and 16% sequentially.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025",
+      "source_date": "2025-02-26",
+      "confidence": "high"
+    },
+    {
+      "id": "C3",
+      "claim": "Blackwell sales exceeded expectations in Q4 FY2025, delivering $11 billion of revenue and representing the fastest product ramp in NVIDIA's company history.",
+      "type": "financial_fact",
+      "verbatim_source_quote": "In Q4, Blackwell sales exceeded our expectations. We delivered $11 billion of Blackwell revenue to meet strong demand. This is the fastest product ramp in our company's history, unprecedented in its speed and scale.",
+      "source_url": "https://www.fool.com/earnings/call-transcripts/2025/02/26/nvidia-nvda-q4-2025-earnings-call-transcript/",
+      "source_date": "2025-02-27",
+      "confidence": "high"
+    },
+    {
+      "id": "C4",
+      "claim": "CEO Jensen Huang characterized agentic AI as delivering an order-of-magnitude lower cost per token and described Grace Blackwell with NVLink as 'the king of inference today.'",
+      "type": "management_statement",
+      "verbatim_source_quote": "Grace Blackwell with NVLink is the king of inference today — delivering an order-of-magnitude lower cost per token",
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C5",
+      "claim": "NVIDIA reported FY2026 revenue of $215.9 billion, representing 65% year-over-year growth.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://investor.nvidia.com/financial-info/financial-reports/default.aspx",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C6",
+      "claim": "Q4 FY2026 revenue reached $68.1 billion, up 73% year-over-year and 20% sequentially, driven by Blackwell sales exceeding $35 billion.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://fortune.com/2026/02/25/nvidia-nvda-earnings-q4-results-jensen-huang/",
+      "source_date": "2026-02-26",
+      "confidence": "high"
+    },
+    {
+      "id": "C7",
+      "claim": "CEO Huang stated that Blackwell is 'completely sold out through mid-2026' and that 'Blackwell sales are off the charts.'",
+      "type": "management_statement",
+      "verbatim_source_quote": "Blackwell sales are off the charts, and cloud GPUs are sold out",
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-third-quarter-fiscal-2026",
+      "source_date": "2025-11-19",
+      "confidence": "high"
+    },
+    {
+      "id": "C8",
+      "claim": "NVIDIA commands approximately 90-92% market share in AI accelerator chips with substantial competitive moats through CUDA software ecosystem and high switching costs.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Commands approximately 90-92% market share in AI accelerator chips with substantial competitive moats through CUDA software ecosystem and high switching costs.",
+      "source_url": "https://www.deepresearchglobal.com/p/nvidia-company-analysis-outlook-report",
+      "source_date": "2026-01-06",
+      "confidence": "high"
+    },
+    {
+      "id": "C9",
+      "claim": "Blackwell contributed nearly 70% of data center compute revenue in Q1 FY2026 with Hopper-to-Blackwell transition nearing completion.",
+      "type": "management_statement",
+      "verbatim_source_quote": "Blackwell contributed nearly 70% of data center compute revenue in the quarter with a transition from Hopper nearly complete.",
+      "source_url": "https://www.rev.com/transcripts/nvidia-q1-2026-earnings-call",
+      "source_date": "2026-02-27",
+      "confidence": "high"
+    },
+    {
+      "id": "C10",
+      "claim": "Inference demand from reasoning AI models has surged tenfold in the past year, with agentic workloads requiring exponentially higher token processing.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "NVIDIA highlighted that inference demand from reasoning AI models has also surged tenfold in the past year, with agentic workloads requiring exponentially higher token processing",
+      "source_url": "https://futurumgroup.com/insights/nvidia-q1-fy-2026-revenue-jumps-69-despite-china-export-setback/",
+      "source_date": "2025-06-03",
+      "confidence": "high"
+    },
+    {
+      "id": "C11",
+      "claim": "Microsoft is already deploying tens of thousands of GB200 systems and is projected to ramp to hundreds of thousands in 2026.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Microsoft, for example, is already deploying tens of thousands of GB200s and is projected to ramp to hundreds of thousands this year.",
+      "source_url": "https://futurumgroup.com/insights/nvidia-q1-fy-2026-revenue-jumps-69-despite-china-export-setback/",
+      "source_date": "2025-06-03",
+      "confidence": "high"
+    },
+    {
+      "id": "C12",
+      "claim": "CEO Jensen Huang characterized 2026 as the year of the 'agentic AI inflection point' where AI systems shift from chatbots to autonomous agents.",
+      "type": "management_statement",
+      "verbatim_source_quote": "CEO Jensen Huang has repeatedly described 2026 as the year of the 'agentic AI inflection point,' where AI systems shift from simple chatbots to autonomous agents capable of complex reasoning and multi-step tasks.",
+      "source_url": "https://ibtimes.com.au/nvidia-stock-climbs-17-ai-supercomputer-ramp-blackwell-demand-fuels-2026-growth-bets-1866678",
+      "source_date": "2026-04-15",
+      "confidence": "high"
+    },
+    {
+      "id": "C13",
+      "claim": "Wall Street consensus rating on NVIDIA is Strong Buy with average 12-month price target around $270–$275, implying 35–38% upside from April 2026 levels.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Across more than 50 firms, the consensus rating is Strong Buy, with an average 12-month price target around $270 to $275 — implying roughly 35 to 38 percent upside from current levels.",
+      "source_url": "https://ibtimes.com.au/nvidia-stock-climbs-17-ai-supercomputer-ramp-blackwell-demand-fuels-2026-growth-bets-1866678",
+      "source_date": "2026-04-15",
+      "confidence": "high"
+    },
+    {
+      "id": "C14",
+      "claim": "NVIDIA's gross margin expanded to 75% in Q4 FY2026, beating guidance and up from 73.4% in Q3, with non-GAAP gross margin at 75.2%.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://fortune.com/2026/02/25/nvidia-nvda-earnings-q4-results-jensen-huang/",
+      "source_date": "2026-02-26",
+      "confidence": "high"
+    },
+    {
+      "id": "C15",
+      "claim": "NVIDIA guided Q1 FY2027 revenue to $78 billion, signaling continued strong momentum.",
+      "type": "management_statement",
+      "verbatim_source_quote": "the company released guidance for the first quarter of fiscal 2027 of $78 billion.",
+      "source_url": "https://fortune.com/2026/02/25/nvidia-nvda-earnings-q4-results-jensen-huang/",
+      "source_date": "2026-02-26",
+      "confidence": "high"
+    },
+    {
+      "id": "C16",
+      "claim": "OpenAI has committed more than $1 trillion in AI infrastructure since mid-2025, much of which loops back to NVIDIA through direct investments and chip purchases.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "OpenAI has committed more than $1 trillion in AI infrastructure since mid-2025, much of which loops back to NVIDIA through direct investments and indirect chip purchases by partners such as Oracle and CoreWeave.",
+      "source_url": "https://www.ig.com/en/news-and-trade-ideas/NVIDIA-Q3-FY2026-earnings-preview-251111",
+      "source_date": "2025-11-17",
+      "confidence": "medium"
+    },
+    {
+      "id": "C17",
+      "claim": "NVIDIA recorded a $4.5 billion charge in Q1 FY2026 related to H20 inventory and purchase obligations after new U.S. export controls on China.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://futurumgroup.com/insights/nvidia-q1-fy-2026-revenue-jumps-69-despite-china-export-setback/",
+      "source_date": "2025-06-03",
+      "confidence": "high"
+    },
+    {
+      "id": "C18",
+      "claim": "Data center segment generated $51.22 billion in Q3 FY2026, representing 89.8% of total sales and a 66% year-over-year increase.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.nasdaq.com/articles/will-nvdas-blackwell-platform-support-its-data-center-revenue-growth",
+      "source_date": "2026-01-05",
+      "confidence": "high"
+    },
+    {
+      "id": "C19",
+      "claim": "Hyperscalers are deploying nearly 1,000 NVL72 racks per week on average, with output expected to accelerate further.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Hyperscalers are deploying nearly 1,000 NVL72 racks per week on average, with output expected to accelerate further this quarter.",
+      "source_url": "https://ibtimes.com.au/nvidia-stock-climbs-17-ai-supercomputer-ramp-blackwell-demand-fuels-2026-growth-bets-1866678",
+      "source_date": "2026-04-15",
+      "confidence": "medium"
+    },
+    {
+      "id": "C20",
+      "claim": "CEO Huang stated 'the reason for that is very simple' that hyperscalers' cash flow will grow because 'in this new world of AI, compute is revenues.'",
+      "type": "management_statement",
+      "verbatim_source_quote": "In the new AI-based economy, compute and revenue are essentially the same thing. Without the capacity to generate AI tokens, which are the small chunks of chatbot outputs in the form of words and text, cloud providers don't have a way to meaningfully grow.",
+      "source_url": "https://fortune.com/2026/02/25/nvidia-nvda-earnings-q4-results-jensen-huang/",
+      "source_date": "2026-02-26",
+      "confidence": "high"
+    },
+    {
+      "id": "C21",
+      "claim": "Blackwell GB300 shipments have crossed GB200 and now account for roughly two-thirds of Blackwell revenue, indicating product mix advancement.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "Blackwell GB300 shipments have crossed GB200 and now account for roughly two-thirds of Blackwell revenue",
+      "source_url": "https://futurumgroup.com/insights/nvidia-q3-fy-2026-record-data-center-revenue-higher-q4-guide/",
+      "source_date": "2025-11-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C22",
+      "claim": "CEO Huang described agentic AI as 'the inflection point' that has 'arrived' and stated computing demand is 'growing exponentially.'",
+      "type": "management_statement",
+      "verbatim_source_quote": "Computing demand is growing exponentially — the agentic AI inflection point has arrived. Grace Blackwell with NVLink is the king of inference today",
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C23",
+      "claim": "NVIDIA's trailing twelve-month free cash flow as of Q3 FY2026 reached approximately $77.3 billion, with FCF margin of 51.5%.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://www.deepresearchglobal.com/p/nvidia-company-analysis-outlook-report",
+      "source_date": "2026-01-06",
+      "confidence": "high"
+    },
+    {
+      "id": "C24",
+      "claim": "NVIDIA returned $41.1 billion to shareholders in fiscal 2026 through share repurchases and dividends.",
+      "type": "financial_fact",
+      "verbatim_source_quote": null,
+      "source_url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2026",
+      "source_date": "2026-02-25",
+      "confidence": "high"
+    },
+    {
+      "id": "C25",
+      "claim": "Some analysts and industry commentators raise concerns that NVIDIA's ecosystem financing arrangements resemble vendor financing from the dot-com era.",
+      "type": "third_party_claim",
+      "verbatim_source_quote": "critics argue these arrangements resemble vendor financing practices from the dot-com era, where inflated commitments masked underlying demand weaknesses.",
+      "source_url": "https://www.ig.com/en/news-and-trade-ideas/NVIDIA-Q3-FY2026-earnings-preview-251111",
+      "source_date": "2025-11-17",
+      "confidence": "medium"
+    }
+  ],
+  "fmp_data": {
+    "ticker": "NVDA",
+    "companyName": "NVIDIA Corporation",
+    "sector": "Technology",
+    "industry": "Semiconductors",
+    "price": 202.06,
+    "marketCap": 4911068128451,
+    "pe": 40.90104891435615,
+    "eps": 4.94021560236998,
+    "dayLow": 197.8397,
+    "dayHigh": 202.17,
+    "yearLow": 95.04,
+    "yearHigh": 212.19,
+    "priceAvg50": 183.2966,
+    "priceAvg200": 181.77365,
+    "volume": 118513377,
+    "peRatioTTM": 40.90104891435615,
+    "priceToBookRatioTTM": 31.221136604934742,
+    "debtToEquityTTM": 0.07255249756823254,
+    "returnOnEquityTTM": null,
+    "grossProfitMarginTTM": 71.06808435754708,
+    "operatingProfitMarginTTM": 60.38168363141272,
+    "netProfitMarginTTM": 55.60253406070261,
+    "revenue": 215938000000,
+    "revenueGrowthYoY": 65.4735357900948,
+    "grossProfit": 153463000000,
+    "operatingIncome": 130387000000,
+    "netIncome": 120067000000
+  }
+}
