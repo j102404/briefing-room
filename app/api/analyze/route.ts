@@ -47,12 +47,13 @@ export async function POST(req: Request) {
           writeDossierCache(subject, thesis, dossier)
         }
 
-        // Emit dossier_ready for future frontend use (ignored by current frontend)
+        // Emit dossier_ready with full claims for the Evidence Dossier drawer
         send('dossier_ready', {
           claim_count: dossier.claims.length,
           subject_type: dossier.subject_type,
           thesis_atomic_claims: dossier.thesis_atomic_claims,
           thesis_internal_issues: dossier.thesis_internal_issues,
+          claims: dossier.claims,
         })
 
         // Stage B: synthesize brief (Sonnet 4.6 + extended thinking)

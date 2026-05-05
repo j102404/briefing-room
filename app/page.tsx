@@ -1,51 +1,164 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import BriefDisplay from '@/components/BriefDisplay'
 import MetricsCard from '@/components/MetricsCard'
+import SourcesDrawer from '@/components/SourcesDrawer'
+import PdfDownload from '@/components/PdfDownload'
 import type { Brief, StockData } from '@/lib/types'
+import type { DossierClaim } from '@/lib/analysis/types'
 
-const DEFAULT_SUBJECT = 'NVDA'
-const DEFAULT_THESIS =
-  "NVDA is the defining infrastructure play of the AI decade. Their CUDA moat is 10+ years deep, hyperscalers are locked in, and every serious AI lab runs on their hardware. Data center revenue hit $47.5B in FY2025, up 142% YoY. With Blackwell ramping and sovereign AI demand just beginning, this is still early innings — inference alone will triple their TAM by 2027. I'm long with a 12-month target of $175."
+// ── Constants ──────────────────────────────────────────────────────────────────
 
-type Status = 'idle' | 'loading' | 'done' | 'error'
+const EXAMPLES = [
+  {
+    label: 'NVDA — Bullish',
+    subject: 'NVDA',
+    thesis:
+      'NVDA is the defining infrastructure play of the AI decade. CUDA moat is 10+ years deep, hyperscalers locked in, inference TAM tripling by 2027. Long with 12-month target of $280.',
+  },
+  {
+    label: 'GME — Weak Thesis',
+    subject: 'GME',
+    thesis:
+      'GameStop is going to $500 because Reddit community sentiment is building again and Ryan Cohen will transform the business.',
+  },
+  {
+    label: 'Gold — Commodity',
+    subject: 'Gold',
+    thesis:
+      'Gold runs to $3,500 by year end driven by central bank buying, geopolitical tensions, and a Fed dovish pivot.',
+  },
+  {
+    label: 'Office CRE — Bearish',
+    subject: 'Commercial Real Estate',
+    thesis:
+      'Commercial real estate faces a multi-year decline as remote work permanently reduces office demand and refinancing walls hit overleveraged landlords.',
+  },
+]
 
-function Spinner() {
+const LOADING_STAGES = [
+  { id: 1, label: 'Market Data' },
+  { id: 2, label: 'Gathering Evidence' },
+  { id: 3, label: 'Building Dossier' },
+  { id: 4, label: 'Synthesizing' },
+]
+
+// ── Sub-components ─────────────────────────────────────────────────────────────
+
+function Spinner({ className = '' }: { className?: string }) {
   return (
-    <span className="inline-block w-4 h-4 border-2 border-gold-700/40 border-t-gold-500 rounded-full animate-spin-slow" />
+    <span
+      className={`inline-block border-2 border-gold-700/40 border-t-gold-500 rounded-full animate-spin-slow ${className}`}
+    />
   )
 }
 
-export default function Home() {
-  const [subject, setSubject]     = useState(DEFAULT_SUBJECT)
-  const [thesis, setThesis]       = useState(DEFAULT_THESIS)
-  const [brief, setBrief]         = useState<Brief | null>(null)
-  const [stockData, setStockData] = useState<StockData | null>(null)
-  const [status, setStatus]       = useState<Status>('idle')
-  const [statusMsg, setStatusMsg] = useState('')
-  const [error, setError]         = useState('')
+function LoadingProgress({ phase, statusMsg }: { phase: number; statusMsg: string }) {
+  return (
+    <div className="mb-8">
+      {/* Stage track */}
+      <div className="relative flex items-start justify-between mb-5">
+        {/* Background rail */}
+        <div className="absolute left-0 right-0 top-[9px] h-px bg-white/[0.05]" />
+        {/* Progress rail */}
+        <div
+          className="absolute left-0 top-[9px] h-px bg-gold-700/50 transition-all duration-700 ease-out"
+          style={{ width: `${((Math.max(phase, 1) - 1) / (LOADING_STAGES.length - 1)) * 100}%` }}
+        />
+        {LOADING_STAGES.map(stage => {
+          const done   = stage.id < phase
+          const active = stage.id === phase
+          return (
+            <div key={stage.id} className="flex flex-col items-center gap-2 relative z-10">
+              <div
+                className={`w-[18px] h-[18px] rounded-full flex items-center justify-center transition-all duration-500 ${
+                  done
+                    ? 'bg-gold-600 border-2 border-gold-600'
+                    : active
+                    ? 'border-2 border-gold-500 bg-navy-900'
+                    : 'border-2 border-white/10 bg-navy-900'
+                }`}
+              >
+                {done && (
+                  <svg className="w-2.5 h-2.5 text-navy-950" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                  </svg>
+                )}
+                {active && (
+                  <div className="w-2 h-2 rounded-full bg-gold-500 animate-pulse" />
+                )}
+              </div>
+              <span
+                className={`text-[9px] font-display font-semibold tracking-[0.1em] uppercase transition-colors whitespace-nowrap ${
+                  active ? 'text-gold-500' : done ? 'text-slate-500' : 'text-slate-700'
+                }`}
+              >
+                {stage.label}
+              </span>
+            </div>
+          )
+        })}
+      </div>
 
+      {/* Status message */}
+      {statusMsg && (
+        <div className="flex items-center gap-2.5 text-slate-500 text-xs font-body">
+          <Spinner className="w-3.5 h-3.5" />
+          <span>{statusMsg}</span>
+        </div>
+      )}
+    </div>
+  )
+}
+
+// ── Page ───────────────────────────────────────────────────────────────────────
+
+type Status = 'idle' | 'loading' | 'done' | 'error'
+
+export default function Home() {
+  const [subject, setSubject]           = useState('NVDA')
+  const [thesis, setThesis]             = useState(
+    "NVDA is the defining infrastructure play of the AI decade. Their CUDA moat is 10+ years deep, hyperscalers are locked in, and every serious AI lab runs on their hardware. Data center revenue hit $47.5B in FY2025, up 142% YoY. With Blackwell ramping and sovereign AI demand just beginning, this is still early innings — inference alone will triple their TAM by 2027. I'm long with a 12-month target of $175."
+  )
+  const [brief, setBrief]               = useState<Brief | null>(null)
+  const [stockData, setStockData]       = useState<StockData | null>(null)
+  const [dossierClaims, setDossierClaims] = useState<DossierClaim[]>([])
+  const [status, setStatus]             = useState<Status>('idle')
+  const [statusMsg, setStatusMsg]       = useState('')
+  const [error, setError]               = useState('')
+  const [loadingPhase, setLoadingPhase] = useState(1)
+  const [noDataWarning, setNoDataWarning] = useState('')
+  const [drawerOpen, setDrawerOpen]     = useState(false)
+
+  const briefRef  = useRef<HTMLDivElement>(null)
   const isRunning = status === 'loading'
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
+  function advancePhase(n: number) {
+    setLoadingPhase(prev => Math.max(prev, n))
+  }
+
+  async function runAnalysis(subj: string, thes: string) {
     setBrief(null)
     setStockData(null)
+    setDossierClaims([])
     setError('')
+    setNoDataWarning('')
+    setDrawerOpen(false)
     setStatus('loading')
     setStatusMsg('Connecting to research desk…')
+    setLoadingPhase(1)
 
     try {
       const res = await fetch('/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ subject: subject.trim(), thesis: thesis.trim() }),
+        body: JSON.stringify({ subject: subj.trim(), thesis: thes.trim() }),
       })
 
       if (!res.ok || !res.body) throw new Error(`Request failed: ${res.status}`)
 
-      const reader = res.body.getReader()
+      const reader  = res.body.getReader()
       const decoder = new TextDecoder()
       let buf = ''
 
@@ -74,14 +187,38 @@ export default function Home() {
             const payload = JSON.parse(dataLine)
 
             if (eventType === 'status') {
-              setStatusMsg(payload.message)
+              const msg: string = payload.message ?? ''
+              setStatusMsg(msg)
+              const lower = msg.toLowerCase()
+              if (lower.includes('gathering') || lower.includes('evidence')) {
+                advancePhase(2)
+              } else if (lower.includes('searching') || lower.includes('compiling')) {
+                advancePhase(3)
+              } else if (lower.includes('stress') || lower.includes('synthesiz')) {
+                advancePhase(4)
+              }
             } else if (eventType === 'stock_data') {
-              // May be null for non-stock subjects — that's expected
               setStockData(payload)
+              advancePhase(2)
+              if (
+                payload === null &&
+                /^[A-Z]{1,5}$/.test(subj.trim())
+              ) {
+                setNoDataWarning(
+                  "Couldn't fetch live data for this ticker — analysis will proceed with web research only."
+                )
+              }
+            } else if (eventType === 'dossier_ready') {
+              if (Array.isArray(payload.claims)) {
+                setDossierClaims(payload.claims)
+              }
+              advancePhase(4)
             } else if (eventType === 'brief') {
               setBrief(payload as Brief)
               setStatus('done')
               setStatusMsg('')
+            } else if (eventType === 'validation_warnings') {
+              console.warn('[BriefingRoom] Validation warnings:', payload.warnings)
             } else if (eventType === 'error') {
               setError(payload.message ?? 'Unknown error')
               setStatus('error')
@@ -92,11 +229,23 @@ export default function Home() {
         }
       }
 
-      if (status !== 'done' && status !== 'error') setStatus('idle')
+      // If stream ended without a brief or error, set idle
+      setStatus(s => (s === 'loading' ? 'idle' : s))
     } catch (err: any) {
       setError(err?.message ?? 'Unexpected error')
       setStatus('error')
     }
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    runAnalysis(subject, thesis)
+  }
+
+  function handleExample(ex: typeof EXAMPLES[0]) {
+    setSubject(ex.subject)
+    setThesis(ex.thesis)
+    runAnalysis(ex.subject, ex.thesis)
   }
 
   return (
@@ -126,13 +275,13 @@ export default function Home() {
             <span className="text-gold-500">your thesis.</span>
           </h2>
           <p className="text-slate-400 text-base max-w-xl font-body leading-relaxed">
-            Enter any subject and your investment thesis. The desk generates an institutional-grade brief
-            that challenges your reasoning with data, not encouragement.
+            Enter any subject and your investment thesis. The desk generates an institutional-grade
+            brief that challenges your reasoning with data, not encouragement.
           </p>
         </div>
 
         {/* ── Form ── */}
-        <form onSubmit={handleSubmit} className="mb-12">
+        <form onSubmit={handleSubmit} className="mb-5">
           <div className="bg-navy-800 border border-white/[0.06] rounded-2xl p-6 space-y-5">
             <div>
               <label
@@ -181,37 +330,103 @@ export default function Home() {
                 disabled={isRunning}
                 className="flex items-center gap-2.5 px-7 py-2.5 bg-gold-500 hover:bg-gold-400 text-navy-950 font-display font-bold text-xs tracking-[0.16em] uppercase rounded-lg transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {isRunning && <Spinner />}
+                {isRunning && <Spinner className="w-4 h-4" />}
                 {isRunning ? 'Analyzing…' : 'Generate Brief'}
               </button>
             </div>
           </div>
         </form>
 
-        {/* ── Status line ── */}
-        {isRunning && statusMsg && (
-          <div className="flex items-center gap-3 mb-6 text-slate-500 text-xs font-body">
-            <Spinner />
-            <span>{statusMsg}</span>
+        {/* ── Example buttons ── */}
+        {!isRunning && !brief && (
+          <div className="flex flex-wrap gap-2 mb-12">
+            <span className="text-[10px] font-display font-semibold tracking-[0.14em] uppercase text-slate-700 self-center mr-1">
+              Try:
+            </span>
+            {EXAMPLES.map(ex => (
+              <button
+                key={ex.label}
+                onClick={() => handleExample(ex)}
+                className="text-[10px] font-body text-slate-500 hover:text-slate-300 border border-white/[0.06] hover:border-white/[0.12] bg-navy-800/30 hover:bg-navy-800/60 px-3 py-1.5 rounded-full transition-all duration-200"
+              >
+                {ex.label}
+              </button>
+            ))}
           </div>
         )}
 
-        {/* ── MetricsCard (early render — visible while brief is still generating) ── */}
+        {/* ── Multi-stage loading ── */}
+        {isRunning && (
+          <LoadingProgress phase={loadingPhase} statusMsg={statusMsg} />
+        )}
+
+        {/* ── No-data warning (ticker not found in FMP) ── */}
+        {noDataWarning && (
+          <div className="mb-5 px-4 py-2.5 bg-navy-800/40 border border-white/[0.06] rounded-lg">
+            <p className="text-[11px] text-slate-500 font-body leading-relaxed">
+              ⚠ {noDataWarning}
+            </p>
+          </div>
+        )}
+
+        {/* ── MetricsCard (early render while brief still generating) ── */}
         {stockData && !brief && (
           <div className="mb-6">
             <MetricsCard data={stockData} />
           </div>
         )}
 
-        {/* ── Error ── */}
+        {/* ── Error card ── */}
         {status === 'error' && (
-          <div className="mb-8 p-4 bg-rose-950/30 border border-rose-800/30 rounded-lg text-rose-400 text-sm font-body">
-            {error}
+          <div className="mb-8 p-5 bg-rose-950/30 border border-rose-800/30 rounded-xl">
+            <p className="text-rose-400 text-sm font-body mb-4 leading-relaxed">{error}</p>
+            <button
+              onClick={() => runAnalysis(subject, thesis)}
+              className="flex items-center gap-2 px-4 py-2 bg-rose-900/30 hover:bg-rose-900/50 border border-rose-700/30 text-rose-400 hover:text-rose-300 font-display text-[10px] tracking-[0.14em] uppercase rounded-lg transition-all"
+            >
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Try Again
+            </button>
           </div>
         )}
 
-        {/* ── Full brief (MetricsCard re-renders inside BriefDisplay at this point) ── */}
-        {brief && <BriefDisplay brief={brief} stockData={stockData} />}
+        {/* ── Full brief output ── */}
+        {brief && (
+          <>
+            {/* PDF + brief header row */}
+            <div className="flex items-center justify-between mb-4 brief-animate" style={{ animationDelay: '0ms' }}>
+              <div className="flex items-center gap-4 flex-1">
+                <div className="flex-1 h-px bg-white/5" />
+                <span className="text-[10px] font-display font-semibold tracking-[0.2em] uppercase text-gold-600">
+                  Research Brief
+                </span>
+                <div className="flex-1 h-px bg-white/5" />
+              </div>
+              <div className="ml-4 flex-shrink-0">
+                <PdfDownload
+                  targetRef={briefRef}
+                  subject={subject}
+                  onBeforeCapture={async () => {
+                    setDrawerOpen(true)
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Captured region for PDF */}
+            <div ref={briefRef} className="space-y-5">
+              <BriefDisplay brief={brief} stockData={stockData} />
+              <SourcesDrawer
+                claims={dossierClaims.length > 0 ? dossierClaims : (brief.sources ?? [])}
+                open={drawerOpen}
+                onOpenChange={setDrawerOpen}
+              />
+            </div>
+          </>
+        )}
       </main>
     </div>
   )

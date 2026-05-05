@@ -129,15 +129,6 @@ export default function BriefDisplay({
 
   return (
     <div className="space-y-5">
-      {/* Divider */}
-      <div className="flex items-center gap-4 mb-2 brief-animate" style={{ animationDelay: '0ms' }}>
-        <div className="flex-1 h-px bg-white/5" />
-        <span className="text-[10px] font-display font-semibold tracking-[0.2em] uppercase text-gold-600">
-          Research Brief
-        </span>
-        <div className="flex-1 h-px bg-white/5" />
-      </div>
-
       {/* Thesis restatement */}
       <SectionCard label="Thesis (Restated)" delay={60}>
         <p className="text-slate-200 font-body leading-relaxed italic">{brief.thesis_restatement}</p>
